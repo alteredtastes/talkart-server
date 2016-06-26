@@ -8,12 +8,12 @@
 
       $stateProvider
         .state('welcome', {
-          url: '/',
+          url: '/canvas',
           templateUrl: 'partials/welcome.html',
           controllerAs: 'main',
           controller: 'MainController'
         })
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/canvas');
         $locationProvider.html5Mode(true);
     })
 
