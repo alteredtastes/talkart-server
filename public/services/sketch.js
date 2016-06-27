@@ -5,12 +5,19 @@
     .module('talkart')
     .factory('Sketch', Sketch);
 
-  function Sketch(p5, Creator) {
+  function Sketch(p5, commands) {
 
     return function(p) {
       p.myRec = new p5.SpeechRec();
       p.myRec.continuous = true;
       p.myRec.interimResults = true;
+
+      var a;
+      var key;
+      var saidWord;
+      var cmds = '';
+      var vcmd = {};
+      var vcmds = [];
 
       p.setup = function() {
         p.createCanvas(800, 800);
@@ -20,15 +27,31 @@
       }
 
       p.draw = function() {
+
       }
 
       p.parseResult = function() {
-        var mostrecentword = p.myRec.resultString.split(' ').pop();
-        if(mostrecentword.indexOf("make")!==-1) {
-          Creator.makeShapeCircle(p);
+        saidWord = p.myRec.resultString.split(' ').pop();
+        if(saidWord.indexOf('stop')!==-1) {
+          console.log('caught stop');
+          commands['stop']();
+          saidWord = '';
+          cmds = '';
+          vcmd = {};
         }
-        // else if(mostrecentword.indexOf("clear")!==-1) { p.background(255); }
-        console.log(mostrecentword);
+
+        for (var i = 0; i < Object.keys(commands).length; i++) {
+          console.log('inside the key', Object.keys(commands)[i]);
+          if(saidWord.indexOf(Object.keys(commands)[i]) != -1) {
+            console.log('caught key is = ', Object.keys(commands)[i]);
+            vcmd = {};
+            a = 1;
+            key = 'word' + a.toString();
+            vcmd.key = Object.keys(commands)[i];
+            cmds = commands[Object.keys(commands)[i]];
+            a++;
+          }
+        }
       }
     }
   }
