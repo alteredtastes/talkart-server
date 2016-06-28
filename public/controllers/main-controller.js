@@ -5,10 +5,10 @@
     .module('talkart')
     .controller("MainController", MainController);
 
-  function MainController(Sketch, Login) {
+  function MainController(Sketch, LoginService) {
     var vm = this;
     vm.message = 'you are on the main controller';
-    Login.getUser().then(function(data) {
+    LoginService.getUser().then(function(data) {
       vm.user = data;
     })
   }

@@ -7,14 +7,17 @@
     .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
       $stateProvider
-        .state('welcome', {
+        .state('main', {
           url: '/',
-          templateUrl: 'partials/welcome.html',
+          templateUrl: 'partials/main.html',
           controllerAs: 'main',
           controller: 'MainController'
         })
+        .state('main.login', {
+          templateUrl: 'partials/main.login.html',
+        })
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);
-    })
-
+    });
 })();
+  

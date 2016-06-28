@@ -20,14 +20,14 @@
       var vcmds = [];
 
       p.setup = function() {
-        p.createCanvas(800, 800);
+        p.createCanvas(window.innerWidth, window.innerHeight);
         p.background(200,200,200);
         p.myRec.onResult = p.parseResult;
         p.myRec.start();
       }
 
       p.draw = function() {
-
+        p.ellipse(400,400,400,400);
       }
 
       p.parseResult = function() {

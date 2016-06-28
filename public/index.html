@@ -8,8 +8,9 @@
     <meta name="author" content="">
     <title>TalkArt</title>
 
-    <link href="startbootstrap-logo-nav-1.0.4/css/bootstrap.min.css" rel="stylesheet">
-    <link href="startbootstrap-logo-nav-1.0.4/css/logo-nav.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="http://s.mlcdn.co/animate.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" media="screen" title="no title" charset="utf-8">
 
     <link rel="stylesheet" href="./style.css" media="screen" title="no title" charset="utf-8">
 
@@ -35,7 +36,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a ui-sref="main.login">Login</a>
                     </li>
                     <li>
                         <a href="#">Services</a>
@@ -47,17 +48,11 @@
             </div>
         </div>
     </nav>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-offset-2 col-md-8">
-          <div ui-view>
-          </div>
-        </div>
-      </div>
+    <div ui-view>
+
     </div>
-    <script src="./startbootstrap-logo-nav-1.0.4/js/jquery.js"></script>
-    <script src="./startbootstrap-logo-nav-1.0.4/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular.js" charset="utf-8" type="text/javascript"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.js" charset="utf-8"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js" charset="utf-8" type="text/javascript"></script>
     <script src="./app.js" charset="utf-8" type="text/javascript"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.1/p5.js" charset="utf-8" type="text/javascript"></script>
@@ -68,6 +63,7 @@
     <script src="./controllers/main-controller.js" charset="utf-8" type="text/javascript"></script>
     <script src="./services/sketch.js" charset="utf-8" type="text/javascript"></script>
     <script src="./services/commands.js" charset="utf-8" type="text/javascript"></script>
-    <script src="./services/login.js" charset="utf-8" type="text/javascript"></script>
+    <script src="./controllers/login-controller.js" charset="utf-8" type="text/javascript"></script>
+    <script src="./services/login-service.js" charset="utf-8" type="text/javascript"></script>
 </body>
 </html>

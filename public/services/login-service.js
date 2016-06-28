@@ -3,9 +3,9 @@
 
   angular
     .module('talkart')
-    .factory('Login', Login);
+    .factory('LoginService', LoginService);
 
-  function Login($http) {
+  function LoginService($http) {
     return {
       getUser: function() {
         return $http.get('/users').then(function(data){
