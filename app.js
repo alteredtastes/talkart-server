@@ -7,23 +7,55 @@ var bodyParser = require('body-parser');
 var knex = require('./db/knex');
 var pg = require('pg');
 var cors = require('cors');
+var util = require('util');
+var session = require('express-session');
+var passport = require('passport');
+var InstagramStrategy = require('passport-instagram').Strategy;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
+require('dotenv').load();
 
 var app = express();
+
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+passport.use(new InstagramStrategy({
+    clientID: process.env.INSTAGRAM_CLIENT_ID,
+    clientSecret: process.env.INSTAGRAM_CLIENT_SECRET,
+    callbackURL: "http://localhost:3000/auth/instagram/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    process.nextTick(function () {
+      return done(null, profile);
+    });
+  }
+));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}))
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
@@ -62,5 +94,8 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
+function ensureAuthenticated(req, res, next) {
+  if(req.isAuthenticated()) { return next(); }
+  res.redirect('/login')
+}
 module.exports = app;

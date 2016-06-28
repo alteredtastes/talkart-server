@@ -1,17 +1,17 @@
 <div class="center-block main-login-modal">
   <div class="login-modal animated fadeInDown">
-    <h2>Account Login</h2>
-    <form class="form-inline login-form" name="loginForm" ng-submit="login.submitLogin()" action="index.html" method="post">
+    <h2>New Artist Registration</h2>
+    <form class="form-inline registration-form" name="registrationForm" ng-submit="submitRegistration()" action="index.html" method="post">
       <div class="form-group">
         <label for="username">Username: </label>
         <input class="form-control" type="text" id="username" name="username" value="">
         <label for="password">Password: </label>
         <input class="form-control" type="password" id="password" name="password" value="">
-        <input class="btn btn-sm btn-default" type="submit">
+        <input class="btn btn-sm round btn-default" type="submit">
       </div>
     </form>
     <div class="inline">
-      <a class="btn btn-lg btn-warning oauth-button" ng-click="login.getInstaUser()"><i class="fa fa-instagram fa-3x oauth-icon"></i>   Login with Instagram</a>
+      <a class="btn btn-lg btn-warning oauth-button"><i class="fa fa-instagram fa-3x oauth-icon"></i>   Login with Instagram</a>
     </div>
   </div>
 </div>

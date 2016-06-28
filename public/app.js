@@ -15,9 +15,13 @@
         })
         .state('main.login', {
           templateUrl: 'partials/main.login.html',
+          controllerAs: 'login',
+          controller: 'LoginController',
+        })
+        .state('main.register', {
+          templateUrl: 'partials/main.register.html',
         })
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);
     });
 })();
-  
