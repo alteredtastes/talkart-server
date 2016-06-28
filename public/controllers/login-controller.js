@@ -10,11 +10,11 @@
     vm.submitLogin = function() {
 
     };
-    vm.getInstaUser = function() {
-      LoginService.getInstaUser().then(function(data) {
-        console.log(data);
-      })
-    }
+    // vm.getInstaUser = function() {
+    //   LoginService.getInstaUser().then(function(data) {
+    //     console.log(data);
+    //   })
+    // }
 
   }
 })();
