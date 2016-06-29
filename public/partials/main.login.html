@@ -1,13 +1,13 @@
 <div class="center-block main-login-modal">
   <div class="login-modal animated fadeInDown">
     <h2>Account Login</h2>
-    <form class="form-inline login-form" name="loginForm" ng-submit="login.submitLogin()" action="index.html" method="post">
+    <form class="form-inline login-form" name="loginForm" ng-submit="login.submitLogin()">
       <div class="form-group">
         <label for="username">Username: </label>
-        <input class="form-control" type="text" id="username" name="username" value="">
+        <input class="form-control" type="text" id="username" name="username" ng-model="login.username">
         <label for="password">Password: </label>
-        <input class="form-control" type="password" id="password" name="password" value="">
-        <input class="btn btn-sm btn-default" type="submit">
+        <input class="form-control" type="password" id="password" name="password" ng-model="login.password">
+        <input class="btn btn-sm btn-default" type="submit" value="Submit">
       </div>
     </form>
     <div class="inline">

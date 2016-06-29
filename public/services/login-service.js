@@ -7,12 +7,16 @@
 
   function LoginService($http) {
     return {
-      getUser: function() {
-        return $http.get('/users').then(function(data){
-          console.log(data.data[0].username);
-          return data.data[0].username;
+      submitLogin: function(username, password) {
+        return $http.post('/users/login', {username: username, password: password}).then(function(data){
+          return data.data;
         })
       },
+      registerUser: function(username, password) {
+        return $http.post('/users', {username: username, password: password}).then(function(data) {
+          return data.data;
+        })
+      }
     }
   }
 })();
