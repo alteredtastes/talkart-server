@@ -13,8 +13,8 @@
       });
     };
     vm.registerUser = function() {
-      Loginservice.registerUser(vm.username, vm.password).then(function(data) {
-        // console.log('this is the controller registerUser data', data);
+      LoginService.registerUser(vm.username, vm.password).then(function(data) {
+        console.log(data);
       });
     }
   }

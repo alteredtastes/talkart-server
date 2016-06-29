@@ -19,7 +19,7 @@ router.post('/login', (req, res, next) => {
     .where({username: req.body.username})
     .then(function(data) {
       if(data[0].password === req.body.password) {
-        res.send('success!');
+        res.send('login successful.');
       } else {
         res.send('wrong password!');
       }
@@ -33,10 +33,10 @@ router.post('/', (req, res, next) => {
   return knex('users')
     .insert({username: req.body.username, password: req.body.password})
     .then(function(data) {
-      res.send('success!');
+      res.send('success! user & pass inserted.');
     })
     .catch(function(err) {
-      res.send('Username taken!');
+      res.send('username taken!');
     });
 })
 

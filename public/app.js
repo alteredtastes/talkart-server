@@ -20,6 +20,8 @@
         })
         .state('main.register', {
           templateUrl: 'partials/main.register.html',
+          controllerAs: 'login',
+          controller: 'LoginController',
         })
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);
