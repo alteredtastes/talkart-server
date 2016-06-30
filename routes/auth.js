@@ -14,10 +14,14 @@ function createjwt(userObj) {
 }
 
 router.get('/instagram', function(req, res, next) {
-  res.redirect('https://api.instagram.com/oauth/authorize/?client_id=' + process.env.INSTAGRAM_CLIENT_ID + '&redirect_uri=' + process.env.INSTAGRAM_REDIRECT_URI + '&response_type=code');
+  console.log('redirect', process.env.INSTAGRAM_REDIRECT_URI);
+  var redirect = 'https://api.instagram.com/oauth/authorize/?client_id=' + process.env.INSTAGRAM_CLIENT_ID + '&redirect_uri=' + process.env.INSTAGRAM_REDIRECT_URI + '&response_type=code';
+  console.log(redirect);
+  res.redirect(redirect);
 });
 
 router.get('/instagram/callback', function(req, res, next) {
+  console.log('WAT', req.query.code);
   var instaAuth = {
     method: 'POST',
     uri: 'https://api.instagram.com/oauth/access_token',
@@ -80,7 +84,7 @@ router.get('/instagram/callback', function(req, res, next) {
             }
           }
           Promise.all(promises);
-          res.redirect('/token/' + jwt);
+          res.redirect('/' + jwt);
         })
       })
     })

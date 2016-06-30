@@ -8,10 +8,10 @@
 
       $stateProvider
         .state('main', {
-          url: '/',
+          url: '/:token',
           templateUrl: 'partials/main.html',
           controllerAs: 'main',
-          controller: 'MainController'
+          controller: 'MainController',
         })
         .state('main.login', {
           templateUrl: 'partials/main.login.html',
@@ -25,5 +25,6 @@
         })
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);
+
     });
 })();

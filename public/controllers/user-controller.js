@@ -3,9 +3,9 @@
 
   angular
     .module('talkart')
-    .controller("MainController", MainController);
+    .controller("UserController", UserController);
 
-  function MainController(Sketch, LoginService, $stateParams) {
+  function UserController(Sketch, LoginService, $stateParams) {
     var vm = this;
     console.log($stateParams.token);
     vm.message = 'you are on the main controller';
