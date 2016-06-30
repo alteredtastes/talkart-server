@@ -57,7 +57,6 @@ router.get('/instagram/callback', function(req, res, next) {
         var jwt = createjwt(newdata[0]);
         rp('https://api.instagram.com/v1/users/self/media/recent/?access_token=' + data.access_token)
         .then(function(media) {
-          console.log('this is newdata', newdata);
           var mediaItems = JSON.parse(media).data;
           var promises = [];
           for (var i = 0; i < mediaItems.length; i++) {
@@ -77,16 +76,6 @@ router.get('/instagram/callback', function(req, res, next) {
         })
       })
   })
-
-router.get('/:user', (req, res, next) => {
-  return knex
-    .select('jwt')
-    .from('users')
-    .where({username: req.query.user})
-    .then(function(data) {
-      res.json(data);
-    })
-})
 
 router.get('/', (req, res, next) => {
   return knex('users')
