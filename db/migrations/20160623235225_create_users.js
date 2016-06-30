@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
     table.string('password').notNullable();
     table.string('full_name').notNullable();
     table.string('instagram_id');
+    table.string('instagram_profile_pic');
   });
 };
 

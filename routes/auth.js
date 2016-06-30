@@ -31,17 +31,31 @@ router.get('/instagram/callback', function(req, res, next) {
     json: true,
   }
   rp(apiCall).then(function(data) {
-
-    console.log(data);
-    // rp('https://api.instagram.com/v1/users/self/media/recent/?access_token=' + data.access_token)
-    //   .then(function(data) {
-    //     console.log(JSON.parse(data).data);
-    //     res.redirect('/');
-    //   });
+    return knex('users')
+      .returning(['id', 'username'])
+      .where(data.user.id)
+      .update({
+        username: data.user.username,
+        password: data.access_token,
+        full_name: data.user.full_name,
+        instagram_profile_pic: data.user.profile_picture,
+      })
+      .catch(function(e) {
+        return knex('users')
+          .returning(['id', 'username'])
+          .insert({
+            username: data.user.username,
+            password: data.access_token,
+            full_name: data.user.full_name,
+            instagram_id: data.user.id,
+            instagram_profile_pic: data.user.profile_picture,
+          })
+      })
+      .then(function(newdata) {
+        res.redirect('/' + data.user.username + '?token=' + createjwt(newdata[0]));
+      })
   })
 })
-
-module.exports = router;
 
 router.get('/', (req, res, next) => {
   return knex('users')
