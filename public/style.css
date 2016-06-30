@@ -34,6 +34,14 @@
   padding: 20px;
 }
 
+.registration-form input {
+  width: 50%;
+  text-align: center;
+}
+
+.registration-form .btn {
+  width: 20%;
+}
 .oauth-button {
   margin-bottom: 20px;
 }

@@ -3,6 +3,7 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.string('username').notNullable().unique();
     table.string('password').notNullable();
+    table.string('full_name').notNullable();
     table.string('instagram_id');
   });
 };

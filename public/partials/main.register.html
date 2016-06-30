@@ -1,17 +1,23 @@
 <div class="center-block main-login-modal">
   <div class="login-modal animated fadeInDown">
     <h2>New Artist Registration</h2>
-    <form class="form-inline registration-form" name="registrationForm" ng-submit="login.registerUser()">
+    <form class="form registration-form" name="registrationForm" ng-submit="login.registerUser()">
       <div class="form-group">
-        <label for="username">Username: </label>
-        <input class="form-control" type="text" name="username" id="username" ng-model="login.username"/>
-        <label for="password">Password: </label>
-        <input class="form-control" type="password" name="password" id="password" ng-model="login.password"/>
+          <label for="username">Username: </label>
+          <input class="form-control center-block" type="text" name="username" id="username" placeholder="roboticasso" ng-model="login.username"/>
+          <label for="password">Password: </label>
+          <input class="form-control center-block" type="password" name="password" id="password" ng-model="login.password"/>
+          <label for="password">Verify Password: </label>
+          <input class="form-control center-block" type="password" name="password" id="password" ng-model="login.password2"/>
+          <label for="firstname">First Name: </label>
+          <input class="form-control center-block" type="text" name="firstname" id="firstname" placeholder="Pablo" ng-model="login.firstname"/>
+          <label for="firstname">Last Name: </label>
+          <input class="form-control center-block" type="text" name="lastname" id="lastname" placeholder="Picasso" ng-model="login.lastname"/><br>
         <input class="btn btn-sm btn-default" type="submit" value="Submit"/>
       </div>
     </form>
     <div class="inline">
-      <a class="btn btn-lg btn-warning oauth-button"><i class="fa fa-instagram fa-3x oauth-icon"></i>   Login with Instagram</a>
+      <a class="btn btn-lg btn-warning oauth-button" href="auth/instagram" target="_self"><i class="fa fa-instagram fa-3x oauth-icon"></i>   Register with Instagram</a>
     </div>
   </div>
 </div>

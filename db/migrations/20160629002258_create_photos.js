@@ -1,8 +1,8 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('photos', function(table){
     table.increments();
-    table.string('userid');
-    table.string('instagram-url');
+    table.string('user_id');
+    table.string('photo_urls_instagram');
   });
 };
 
