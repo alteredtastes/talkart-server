@@ -56,12 +56,33 @@ router.get('/instagram/callback', function(req, res, next) {
       .then(function(newdata) {
         return knex('users')
           .where({instagram_id: data.user.id})
+          .returning('id')
           .update({
             jwt: createjwt(newdata[0]),
           })
-          .then(function() {
-            res.redirect('/' + data.user.username);
+          .then(function(userdata) {
+            rp('https://api.instagram.com/v1/users/self/media/recent/?access_token=' + data.access_token)
+            .then(function(media) {
+              console.log('this is the userdata', userdata[0]);
+              var mediaItems = JSON.parse(media).data;
+              var promises = [];
+              for (var i = 0; i < mediaItems.length; i++) {
+                if(mediaItems[i].type === 'image') {
+                  promises.push(
+                    knex('photos')
+                    .where({id: userdata[0]})
+                    .insert({
+                      photo_urls_instagram: mediaItems[i].images.standard_resolution.url
+                    }));
+                }
+              }
+              Promise.all(promises);
+              res.json(JSON.parse(media));
+            })
           })
+          // .then(function() {
+          //   res.redirect('/?user=' + data.user.username);
+          // })
       })
   })
 })
@@ -70,7 +91,7 @@ router.get('/:user', (req, res, next) => {
   return knex
     .select('jwt')
     .from('users')
-    .where({username: req.params.user})
+    .where({username: req.query.user})
     .then(function(data) {
       res.json(data);
     })
@@ -99,7 +120,9 @@ router.post('/login', (req, res, next) => {
         res.json({
           success: true,
           message: 'Here is your token.',
-          token: createjwt({id: data[0].id, username: data[0].username}),
+          token: createjwt({
+            id: data[0].id,
+            username: data[0].username}),
         });
       } else {
         res.json({
