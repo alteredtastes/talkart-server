@@ -6,6 +6,13 @@ var jwt = require('jsonwebtoken');
 require('dotenv').load();
 /* GET users listing. */
 
+function createjwt(userObj) {
+  var token = jwt.sign(userObj, process.env.APP_SECRET, {
+    expiresIn: '1d'
+  });
+  return token;
+}
+
 router.get('/', (req, res, next) => {
   return knex('users')
     .then(function(data){
@@ -17,33 +24,54 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-  return knex('users')
-    .where({username: req.body.username})
+  return knex
+    .select('id', 'username', 'password')
+    .from('users')
+    .where({
+      username: req.body.username,
+    })
     .then(function(data) {
       if(data[0].password === req.body.password) {
-        console.log(data[0]);
-        var token = jwt.sign(data[0], process.env.APP_SECRET, {
-          expiresIn: '1d'
-        }
-    );
-        res.json({success: true, message: 'Here is your token.', token: token});
+        res.json({
+          success: true,
+          message: 'Here is your token.',
+          token: createjwt({id: data[0].id, username: data[0].username}),
+        });
       } else {
-        res.json({success: false, message: 'wrong password!'});
+        res.json({
+          success: false,
+          message: 'wrong password!',
+        });
       }
     })
     .catch(function(err) {
-      res.json({success:false, message: err});
+      res.json({
+        success:false,
+        message: err,
+      });
     });
 });
 
 router.post('/', (req, res, next) => {
   return knex('users')
-    .insert({username: req.body.username, password: req.body.password})
+    .insert({
+      username: req.body.username,
+      password: req.body.password,
+    })
+    .returning(['id','username'])
     .then(function(data) {
-      res.send('success! user & pass inserted.');
+      console.log(data[0]);
+      res.json({
+        success: true,
+        message: 'Heres your token, new user!',
+        token: createjwt(data[0]),
+      });
     })
     .catch(function(err) {
-      res.send('username taken!');
+      res.json({
+        success: false,
+        message: 'username taken!',
+      });
     });
 })
 

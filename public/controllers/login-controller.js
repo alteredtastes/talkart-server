@@ -14,7 +14,7 @@
     };
     vm.registerUser = function() {
       LoginService.registerUser(vm.username, vm.password).then(function(data) {
-        console.log(data);
+        console.log(data); //
       });
     }
   }
