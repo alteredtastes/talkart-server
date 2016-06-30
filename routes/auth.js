@@ -54,38 +54,29 @@ router.get('/instagram/callback', function(req, res, next) {
           })
       })
       .then(function(newdata) {
-        return knex('users')
-          .where({instagram_id: data.user.id})
-          .returning('id')
-          .update({
-            jwt: createjwt(newdata[0]),
-          })
-          .then(function(userdata) {
-            rp('https://api.instagram.com/v1/users/self/media/recent/?access_token=' + data.access_token)
-            .then(function(media) {
-              console.log('this is the userdata', userdata[0]);
-              var mediaItems = JSON.parse(media).data;
-              var promises = [];
-              for (var i = 0; i < mediaItems.length; i++) {
-                if(mediaItems[i].type === 'image') {
-                  promises.push(
-                    knex('photos')
-                    .where({id: userdata[0]})
-                    .insert({
-                      photo_urls_instagram: mediaItems[i].images.standard_resolution.url
-                    }));
-                }
+        var jwt = createjwt(newdata[0]);
+        rp('https://api.instagram.com/v1/users/self/media/recent/?access_token=' + data.access_token)
+        .then(function(media) {
+          console.log('this is newdata', newdata);
+          var mediaItems = JSON.parse(media).data;
+          var promises = [];
+          for (var i = 0; i < mediaItems.length; i++) {
+            if(mediaItems[i].type === 'image') {
+              promises.push(
+                knex('photos')
+                .insert({
+                  user_id: newdata[0].id,
+                  photo_time_instagram: mediaItems[i].created_time,
+                  photo_urls_instagram: mediaItems[i].images.standard_resolution.url,
+                }));
               }
-              Promise.all(promises);
-              res.json(JSON.parse(media));
-            })
+            }
+            Promise.all(promises);
+            res.redirect('/token/' + jwt);
           })
-          // .then(function() {
-          //   res.redirect('/?user=' + data.user.username);
-          // })
+        })
       })
   })
-})
 
 router.get('/:user', (req, res, next) => {
   return knex
