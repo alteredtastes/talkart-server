@@ -67,14 +67,23 @@ router.get('/instagram/callback', function(req, res, next) {
                   user_id: newdata[0].id,
                   photo_time_instagram: mediaItems[i].created_time,
                   photo_urls_instagram: mediaItems[i].images.standard_resolution.url,
-                }));
-              }
+                })
+                .catch(function(err) {
+                  return knex('photos')
+                    .update({
+                      user_id: newdata[0].id,
+                      photo_time_instagram: mediaItems[i].created_time,
+                      photo_urls_instagram: mediaItems[i].images.standard_resolution.url,
+                    })
+                })
+              );
             }
-            Promise.all(promises);
-            res.redirect('/token/' + jwt);
-          })
+          }
+          Promise.all(promises);
+          res.redirect('/token/' + jwt);
         })
       })
+    })
   })
 
 router.get('/', (req, res, next) => {
