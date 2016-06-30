@@ -18,7 +18,7 @@ router.get('/instagram', function(req, res, next) {
 });
 
 router.get('/instagram/callback', function(req, res, next) {
-  var apiCall = {
+  var instaAuth = {
     method: 'POST',
     uri: 'https://api.instagram.com/oauth/access_token',
     form: {
@@ -30,31 +30,50 @@ router.get('/instagram/callback', function(req, res, next) {
     },
     json: true,
   }
-  rp(apiCall).then(function(data) {
+  rp(instaAuth).then(function(data) {
     return knex('users')
       .returning(['id', 'username'])
-      .where(data.user.id)
-      .update({
+      .insert({
         username: data.user.username,
         password: data.access_token,
         full_name: data.user.full_name,
+        instagram_id: data.user.id,
+        instagram_username: data.user.username,
         instagram_profile_pic: data.user.profile_picture,
       })
-      .catch(function(e) {
+      .catch(function(err) {
         return knex('users')
           .returning(['id', 'username'])
-          .insert({
+          .where({instagram_id: data.user.id})
+          .update({
             username: data.user.username,
             password: data.access_token,
             full_name: data.user.full_name,
-            instagram_id: data.user.id,
+            instagram_username: data.user.username,
             instagram_profile_pic: data.user.profile_picture,
           })
       })
       .then(function(newdata) {
-        res.redirect('/' + data.user.username + '?token=' + createjwt(newdata[0]));
+        return knex('users')
+          .where({instagram_id: data.user.id})
+          .update({
+            jwt: createjwt(newdata[0]),
+          })
+          .then(function() {
+            res.redirect('/' + data.user.username);
+          })
       })
   })
+})
+
+router.get('/:user', (req, res, next) => {
+  return knex
+    .select('jwt')
+    .from('users')
+    .where({username: req.params.user})
+    .then(function(data) {
+      res.json(data);
+    })
 })
 
 router.get('/', (req, res, next) => {
