@@ -7,7 +7,12 @@
 
   function MainController(Sketch, LoginService, $stateParams) {
     var vm = this;
-    console.log($stateParams.token);
-    vm.message = 'you are on the main controller';
+    if($stateParams.token) {
+      console.log('inside the controller');
+      LoginService.getUserData($stateParams.token).then(function(data) {
+        state.go('/users/' + data.user)
+      })
     }
+
+  }
 })();

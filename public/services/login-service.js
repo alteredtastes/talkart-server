@@ -7,6 +7,7 @@
 
   function LoginService($http) {
     var token;
+    var userData;
     return {
       submitLogin: function(username, password) {
         return $http.post('/auth/login', {
@@ -16,21 +17,21 @@
           return data.data;
         })
       },
-      registerUser: function(username, password) {
+      registerUser: function(username, password, full_name) {
         return $http.post('/auth', {
           username: username,
-          password: password
+          password: password,
+          full_name: full_name,
         }).then(function(data) {
           return data.data;
         })
       },
-      getToken: function(user) {
+      getUserData: function(token) {
         console.log('inside the service');
-        $http.post('/auth/?user=' + user).then(function(data) {
-          token = data[0];
-          console.log(token);
+        return $http.get('/users/' + token).then(function(data) {
+          userData = data.data;
         })
       }
+      }
     }
-  }
 })();

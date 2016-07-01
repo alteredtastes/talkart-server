@@ -30,10 +30,30 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
-
 app.use('/', routes);
-app.use('/users', users);
 app.use('/auth', auth);
+
+users.use(function(req, res, next) {
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+  if(token) {
+    jwt.verify(token, process.env.APP_SECRET, function(err, decoded) {
+      if(err) {
+        res.json({success: false, message: 'Failed to authenticate token.'});
+      } else {
+        req.decoded = decoded;
+        next();
+      }
+    });
+  } else {
+    return res.status(403).send({
+      success: false,
+      message: 'No token provided.',
+    })
+  }
+});
+
+app.use('/users', users);
 
 
 app.get('/*',(req, res) => {

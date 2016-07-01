@@ -23,6 +23,12 @@
           controllerAs: 'login',
           controller: 'LoginController',
         })
+        .state('main.user', {
+          url: '^/users/:user',
+          templateUrl: 'partials/main.user.html',
+          controllerAs: 'main',
+          controller: 'MainController',
+        })
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);
 

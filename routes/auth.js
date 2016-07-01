@@ -137,10 +137,10 @@ router.post('/', (req, res, next) => {
     .insert({
       username: req.body.username,
       password: req.body.password,
+      full_name: req.body.full_name,
     })
     .returning(['id','username'])
     .then(function(data) {
-      console.log(data[0]);
       res.json({
         success: true,
         message: 'Heres your token, new user!',

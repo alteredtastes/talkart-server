@@ -1,20 +1,122 @@
-<div class="center-block main-login-modal">
-  <div class="login-modal animated fadeInDown">
-    <h2>New Artist Registration</h2>
-    <form class="form registration-form" name="registrationForm" ng-submit="login.registerUser()">
-      <div class="form-group">
-          <label for="username">Username: </label>
-          <input class="form-control center-block" type="text" name="username" id="username" placeholder="roboticasso" ng-model="login.username"/>
-          <label for="password">Password: </label>
-          <input class="form-control center-block" type="password" name="password" id="password" ng-model="login.password"/>
-          <label for="password">Verify Password: </label>
-          <input class="form-control center-block" type="password" name="password" id="password" ng-model="login.password2"/>
-          <label for="firstname">First Name: </label>
-          <input class="form-control center-block" type="text" name="firstname" id="firstname" placeholder="Pablo" ng-model="login.firstname"/>
-          <label for="firstname">Last Name: </label>
-          <input class="form-control center-block" type="text" name="lastname" id="lastname" placeholder="Picasso" ng-model="login.lastname"/><br>
-        <input class="btn btn-sm btn-default" type="submit" value="Submit"/>
+<div class="center-block main-modal">
+  <div class="modal-inner animated fadeInDown">
+    <h2>Create Your Account</h2>
+    <form
+    class="form registration-form"
+    name="registrationForm"
+    ng-submit="login.registerUser(registrationForm.$valid); registrationForm.$setPristine()"
+    novalidate>
+
+
+      <div
+      class="form-group"
+      ng-class="{'has-error':registrationForm.lastname.$invalid && registrationForm.lastname.$dirty, 'has-success': registrationForm.lastname.$valid && registrationForm.lastname.$dirty}">
+          <label for="lastname">First Name: </label>
+          <input
+          class="form-control center-block"
+          type="text"
+          name="lastname"
+          placeholder="roboticasso"
+          ng-model="login.lastname"
+          ng-required="required"
+          id="lastname"
+          ng-maxlength="25" />
+          <!-- <p
+          ng-show="(registrationForm.lastname.$error.required) || (registrationForm.lastname.$touched && registrationForm.lastname.$pristine)"
+          class="help-block">First Name: is required!</p> -->
       </div>
+
+      <div
+      class="form-group"
+      ng-class="{'has-error':registrationForm.firstname.$invalid && registrationForm.firstname.$dirty, 'has-success': registrationForm.firstname.$valid && registrationForm.firstname.$dirty}">
+      <label for="firstname">Last Name: </label>
+      <input
+      class="form-control center-block"
+      type="text"
+      name="firstname"
+      placeholder="roboticasso"
+      ng-model="login.firstname"
+      ng-required="required"
+      id="firstname"
+      ng-maxlength="25" />
+      <!-- <p
+      ng-show="(registrationForm.firstname.$error.required) || (registrationForm.firstname.$touched && registrationForm.firstname.$pristine)"
+      class="help-block">Last Name: is required!</p> -->
+    </div>
+      <div
+      class="form-group"
+      ng-class="{'has-error':registrationForm.username.$invalid && registrationForm.username.$dirty, 'has-success': registrationForm.username.$valid && registrationForm.username.$dirty}">
+          <label for="username">Username: </label>
+          <input
+          class="form-control center-block"
+          type="text"
+          name="username"
+          placeholder="roboticasso"
+          ng-model="login.username"
+          ng-required="required"
+          id="username"
+          ng-minlength="5"
+          ng-maxlength="25" />
+          <p
+          ng-show="registrationForm.username.$error.required"
+          class="help-block">Username is required!</p>
+          <p
+          ng-show="registrationForm.username.$error.maxlength || registrationForm.username.$error.minlength"
+          class="help-block">Username must be between 5 and 25 characters long.</p>
+      </div>
+
+      <div
+      class="form-group"
+      ng-class="{
+        'has-error':registrationForm.password.$invalid && registrationForm.password.$dirty,
+        'has-success': registrationForm.password.$valid && registrationForm.password.$dirty}">
+          <label for="password">Password: </label>
+          <input
+          class="form-control center-block"
+          type="password"
+          name="password"
+          ng-model="login.password"
+          ng-required="required"
+          id="password"
+          ng-minlength="5"
+          ng-maxlength="25">
+          <p
+          ng-show="registrationForm.password.$error.required"
+          class="help-block">Password is required!</p>
+          <p
+          ng-show="registrationForm.password.$error.maxlength || registrationForm.password.$error.minlength"
+          class="help-block">Password must be between 5 and 25 characters long.</p>
+          <!-- <p
+          ng-show="(login.username === login.password) && registrationForm.password.$dirty"
+          class="help-block">Password can't be the same as username!</p> -->
+      </div>
+
+      <!-- <div
+      class="form-group"
+      ng-class="{
+        'has-error': registrationForm.password2.$touched && (login.password != login.password2),
+      'has-success': registrationForm.password2.$valid && registrationForm.password2.$dirty && (login.password === login.password2)}">
+          <label for="password2">Verify Password: </label>
+          <input
+          class="form-control center-block"
+          type="password"
+          name="password2"
+          ng-model="login.password2"
+          ng-required="required"
+          id="password2">
+          <p
+          ng-show="(registrationForm.password2.$error.required) || (registrationForm.password2.$touched && registrationForm.password2.$pristine)"
+          class="help-block">Passwords verification required!</p>
+          <p
+          ng-show="registrationForm.password2.$touched && (login.password != login.password2)"
+          class="help-block">Passwords don't match!</p>
+          <p
+          ng-show="registrationForm.password2.$dirty && (login.password === login.password2)"
+          class="help-block">Passwords match!</p>
+      </div> -->
+
+      <input type="submit" class="btn btn-sm btn-default" name="submit" value="Submit" ng-disabled="registrationForm.$invalid">
+
     </form>
     <div class="inline">
       <a class="btn btn-lg btn-warning oauth-button" href="auth/instagram" target="_self"><i class="fa fa-instagram fa-3x oauth-icon"></i>   Register with Instagram</a>
