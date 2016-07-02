@@ -7,16 +7,33 @@
     ng-submit="login.registerUser(registrationForm.$valid); registrationForm.$setPristine()"
     novalidate>
 
+        <div
+        class="form-group"
+        ng-class="{'has-error':registrationForm.firstname.$invalid && registrationForm.firstname.$dirty, 'has-success': registrationForm.firstname.$valid && registrationForm.firstname.$dirty}">
+        <label for="firstname">First Name: </label>
+        <input
+        class="form-control center-block"
+        type="text"
+        name="firstname"
+        placeholder="Pablo"
+        ng-model="login.firstname"
+        ng-required="required"
+        id="firstname"
+        ng-maxlength="25" />
+        <!-- <p
+        ng-show="(registrationForm.firstname.$error.required) || (registrationForm.firstname.$touched && registrationForm.firstname.$pristine)"
+        class="help-block">Last Name: is required!</p> -->
+      </div>
 
       <div
       class="form-group"
       ng-class="{'has-error':registrationForm.lastname.$invalid && registrationForm.lastname.$dirty, 'has-success': registrationForm.lastname.$valid && registrationForm.lastname.$dirty}">
-          <label for="lastname">First Name: </label>
+          <label for="lastname">Last Name: </label>
           <input
           class="form-control center-block"
           type="text"
           name="lastname"
-          placeholder="roboticasso"
+          placeholder="Picasso"
           ng-model="login.lastname"
           ng-required="required"
           id="lastname"
@@ -28,23 +45,6 @@
 
       <div
       class="form-group"
-      ng-class="{'has-error':registrationForm.firstname.$invalid && registrationForm.firstname.$dirty, 'has-success': registrationForm.firstname.$valid && registrationForm.firstname.$dirty}">
-      <label for="firstname">Last Name: </label>
-      <input
-      class="form-control center-block"
-      type="text"
-      name="firstname"
-      placeholder="roboticasso"
-      ng-model="login.firstname"
-      ng-required="required"
-      id="firstname"
-      ng-maxlength="25" />
-      <!-- <p
-      ng-show="(registrationForm.firstname.$error.required) || (registrationForm.firstname.$touched && registrationForm.firstname.$pristine)"
-      class="help-block">Last Name: is required!</p> -->
-    </div>
-      <div
-      class="form-group"
       ng-class="{'has-error':registrationForm.username.$invalid && registrationForm.username.$dirty, 'has-success': registrationForm.username.$valid && registrationForm.username.$dirty}">
           <label for="username">Username: </label>
           <input
@@ -53,6 +53,7 @@
           name="username"
           placeholder="roboticasso"
           ng-model="login.username"
+          ng-change="login.checkUsername()"
           ng-required="required"
           id="username"
           ng-minlength="5"

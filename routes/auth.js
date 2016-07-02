@@ -14,14 +14,11 @@ function createjwt(userObj) {
 }
 
 router.get('/instagram', function(req, res, next) {
-  console.log('redirect', process.env.INSTAGRAM_REDIRECT_URI);
   var redirect = 'https://api.instagram.com/oauth/authorize/?client_id=' + process.env.INSTAGRAM_CLIENT_ID + '&redirect_uri=' + process.env.INSTAGRAM_REDIRECT_URI + '&response_type=code';
-  console.log(redirect);
   res.redirect(redirect);
 });
 
 router.get('/instagram/callback', function(req, res, next) {
-  console.log('WAT', req.query.code);
   var instaAuth = {
     method: 'POST',
     uri: 'https://api.instagram.com/oauth/access_token',
@@ -84,9 +81,32 @@ router.get('/instagram/callback', function(req, res, next) {
             }
           }
           Promise.all(promises);
+          console.log('this is the insta redirect');
           res.redirect('/' + jwt);
         })
       })
+    })
+  })
+
+router.post('/', (req, res, next) => {
+  return knex('users')
+    .insert({
+      username: req.body.username,
+      password: req.body.password,
+      full_name: req.body.full_name,
+    })
+    .returning(['id','username'])
+    // .then(function(data) {
+    //   var jwt = createjwt(data[0]);
+    //   console.log('this is the local registration redirect');
+    //   res.redirect('/' + jwt);
+    // })
+    .then(function(data) {
+      res.json({
+        success: true,
+        message: 'Heres your token, new user!',
+        token: createjwt(data[0]),
+      });
     })
   })
 
@@ -98,6 +118,18 @@ router.get('/', (req, res, next) => {
     .catch(function(err) {
       console.log('Failed to return users from database.');
     });
+});
+
+router.get('/:user', (req, res, next) => {
+  return knex('users')
+    .where({username: req.params.user})
+    .then(function(data) {
+      if(data[0]) {
+        res.json({exists: true});
+      } else {
+        res.json({exists: false});
+      }
+    })
 });
 
 router.post('/login', (req, res, next) => {
@@ -132,27 +164,5 @@ router.post('/login', (req, res, next) => {
     });
 });
 
-router.post('/', (req, res, next) => {
-  return knex('users')
-    .insert({
-      username: req.body.username,
-      password: req.body.password,
-      full_name: req.body.full_name,
-    })
-    .returning(['id','username'])
-    .then(function(data) {
-      res.json({
-        success: true,
-        message: 'Heres your token, new user!',
-        token: createjwt(data[0]),
-      });
-    })
-    .catch(function(err) {
-      res.json({
-        success: false,
-        message: 'username taken!',
-      });
-    });
-})
 
 module.exports = router;
