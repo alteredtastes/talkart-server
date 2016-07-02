@@ -32,7 +32,7 @@
         })
       },
       getUserData: function(token) {
-        return $http.get('/users/getuser?token=' + token).then(function(data) {
+        return $http.get('/users/:user?token=' + token).then(function(data) {
           userData = data.data;
         })
       },
