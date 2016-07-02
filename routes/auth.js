@@ -81,7 +81,7 @@ router.get('/instagram/callback', function(req, res, next) {
             }
           }
           Promise.all(promises);
-          res.redirect('/token/' + jwt);
+          res.redirect('/token/' + newdata[0].id + '/' + jwt);
         })
       })
     })
@@ -104,6 +104,8 @@ router.post('/', (req, res, next) => {
       res.json({
         success: true,
         message: 'Heres your token, new user!',
+        id: data[0].id,
+        username: data[0].username,
         token: createjwt(data[0]),
       });
     })

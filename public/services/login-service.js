@@ -19,8 +19,8 @@
           password: password,
           full_name: full_name,
         })
-        .then(function(token) {
-          return token.data;
+        .then(function(data) {
+          return data.data;
         })
       },
       submitLogin: function(username, password) {
@@ -31,9 +31,9 @@
           return data.data;
         })
       },
-      getUserData: function(token) {
-        return $http.get('/users/:user?token=' + token).then(function(data) {
-          userData = data.data;
+      getUserData: function(id, token) {
+        return $http.get('/users/' + id + '/' + token).then(function(data) {
+          return userData = data.data;
         })
       },
       returnUserData: function() {

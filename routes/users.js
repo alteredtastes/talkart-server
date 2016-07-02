@@ -6,8 +6,9 @@ var jwt = require('jsonwebtoken');
 require('dotenv').load();
 
 
-router.get('/:user', function(req, res, next){
-  console.log('this is the token in the /users/ in express', req.query.token);
+router.get('/:id/:token', function(req, res, next){
+  console.log('this is the id', req.params.id);
+  console.log('this is the token', req.params.token);
 })
 
 

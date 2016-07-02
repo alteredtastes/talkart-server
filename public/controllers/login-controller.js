@@ -9,7 +9,7 @@
     var vm = this;
 
     if($stateParams.token){
-      LoginService.getUserData($stateParams.token).then(function(data) {
+      LoginService.getUserData($stateParams.id, $stateParams.token).then(function(data) {
         $state.go('main.user', {user: data.user});
       })
     }
@@ -27,7 +27,7 @@
       LoginService.registerUser(vm.username, vm.password, vm.full_name)
       .then(function(data) {
         if(data.success) {
-          LoginService.getUserData(data.token).then(function(data) {
+          LoginService.getUserData(data.id, data.token).then(function(data) {
             $state.go('main.user', {user: data.user});
           })
         } else {

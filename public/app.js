@@ -24,7 +24,7 @@
           controller: 'LoginController',
         })
         .state('main.token', {
-          url: '^/token/:token',
+          url: '^/token/:id/:token',
           controllerAs: 'login',
           controller: 'LoginController',
         })
