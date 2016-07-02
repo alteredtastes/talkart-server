@@ -33,25 +33,25 @@ app.use(cors());
 app.use('/', routes);
 app.use('/auth', auth);
 
-// app.use(function(req, res, next) {
-//   var token = req.body.token || req.query.token || req.headers['x-access-token'];
-//
-//   if(token) {
-//     jwt.verify(token, process.env.APP_SECRET, function(err, decoded) {
-//       if(err) {
-//         res.json({success: false, message: 'Failed to authenticate token.'});
-//       } else {
-//         req.decoded = decoded;
-//         next();
-//       }
-//     });
-//   } else {
-//     return res.status(403).send({
-//       success: false,
-//       message: 'No token provided.',
-//     })
-//   }
-// });
+users.use(function(req, res, next) {
+  var token = req.body.token || req.query.token || req.params.token || req.headers['x-access-token'];
+
+  if(token) {
+    jwt.verify(token, process.env.APP_SECRET, function(err, decoded) {
+      if(err) {
+        res.json({success: false, message: 'Failed to authenticate token.'});
+      } else {
+        req.decoded = decoded;
+        next();
+      }
+    });
+  } else {
+    return res.status(403).send({
+      success: false,
+      message: 'No token provided.',
+    })
+  }
+});
 
 app.use('/users', users);
 
