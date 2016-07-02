@@ -9,14 +9,12 @@
     var vm = this;
 
     if($stateParams.token){
-      LoginService.getUserData($stateParams.id, $stateParams.token).then(function(data) {
-        $state.go('main.user', {user: data.user});
-      })
+      LoginService.getUserData($stateParams.id, $stateParams.token);
     }
 
     vm.checkUsername = function() {
       LoginService.checkUsername(vm.username).then(function(data) {
-        console.log('controller: true = user already exists', data.exists);
+        console.log('form validationg: user exists =', data.exists);
       })
     }
 
@@ -27,9 +25,7 @@
       LoginService.registerUser(vm.username, vm.password, vm.full_name)
       .then(function(data) {
         if(data.success) {
-          LoginService.getUserData(data.id, data.token).then(function(data) {
-            $state.go('main.user', {user: data.user});
-          })
+          LoginService.getUserData(data.id, data.token);
         } else {
           vm.registerError = 'We were unable to process your registration.';
         }

@@ -5,13 +5,25 @@ var rp = require('request-promise').defaults({ simple: false });
 
 
 router.get('/:id/:token', function(req, res, next){
-  console.log('this is the req.params.id', req.params.id);
   return knex('users')
-    .then(function(data) {
-      console.log('this is the data', data);
-    })
-    .catch(function(err) {
-      console.log('this is the error', err);
+    .where({id: req.params.id})
+    .then(function(userData) {
+      return knex('photos')
+        .where({user_id: req.params.id})
+        .then(function(mediaData) {
+          console.log('this is the then', mediaData);
+          res.json({
+            username: userData[0].username,
+            full_name: userData[0].full_name,
+            instagram_id: userData[0].instagram_id,
+            instagram_username: userData[0].instagram_username,
+            instagram_profile_pic: userData[0].instagram_profile_pic,
+            instagram_user_media: mediaData,
+          })
+        })
+        .catch(function(mediaData) {
+          console.log('this is the catch', mediaData.data);
+      })
     })
 })
 

@@ -5,7 +5,7 @@
     .module('talkart')
     .factory('LoginService', LoginService);
 
-  function LoginService($http, $stateParams) {
+  function LoginService($http, $stateParams, $state) {
     var userData;
     return {
       checkUsername: function(username) {
@@ -33,7 +33,10 @@
       },
       getUserData: function(id, token) {
         return $http.get('/users/' + id + '/' + token).then(function(data) {
-          return userData = data.data;
+          console.log('data from the login-service', data.data.username);
+          $state.go('main.user', {user: data.data.username});
+          userData = data.data;
+
         })
       },
       returnUserData: function() {
