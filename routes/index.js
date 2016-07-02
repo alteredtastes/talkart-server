@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var knex = require('knex');
+var knex = require('../db/knex');
 var rp = require('request-promise').defaults({ simple: false });
 require('dotenv').load();
 

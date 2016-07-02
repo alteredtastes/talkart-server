@@ -1,15 +1,18 @@
 var express = require('express');
 var router = express.Router();
-var knex = require('knex');
+var knex = require('../db/knex');
 var rp = require('request-promise').defaults({ simple: false });
-var jwt = require('jsonwebtoken');
-require('dotenv').load();
 
 
 router.get('/:id/:token', function(req, res, next){
-  console.log('this is the id', req.params.id);
-  console.log('this is the token', req.params.token);
+  console.log('this is the req.params.id', req.params.id);
+  return knex('users')
+    .then(function(data) {
+      console.log('this is the data', data);
+    })
+    .catch(function(err) {
+      console.log('this is the error', err);
+    })
 })
-
 
 module.exports = router;
