@@ -81,8 +81,7 @@ router.get('/instagram/callback', function(req, res, next) {
             }
           }
           Promise.all(promises);
-          console.log('this is the insta redirect');
-          res.redirect('/' + jwt);
+          res.redirect('/token/' + jwt);
         })
       })
     })
