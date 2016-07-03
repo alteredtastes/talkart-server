@@ -9,7 +9,9 @@
     var vm = this;
 
     if($stateParams.token){
-      LoginService.getUserData($stateParams.id, $stateParams.token);
+      LoginService.getUserData($stateParams.id, $stateParams.token).then(function(data) {
+        $state.go('main.user', {user: data.username});
+      });
     }
 
     vm.checkUsername = function() {
@@ -25,7 +27,9 @@
       LoginService.registerUser(vm.username, vm.password, vm.full_name)
       .then(function(data) {
         if(data.success) {
-          LoginService.getUserData(data.id, data.token);
+          LoginService.getUserData(data.id, data.token).then(function(data) {
+            $state.go('main.user', {user: data.username});
+          });
         } else {
           vm.registerError = 'We were unable to process your registration.';
         }

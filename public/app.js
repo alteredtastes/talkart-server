@@ -30,8 +30,9 @@
         })
         .state('main.user', {
           url: '^/users/:user',
-          controllerAs: 'main',
-          controller: 'MainController',
+          templateUrl: 'partials/main.user.html',
+          controllerAs: 'user',
+          controller: 'UserController',
         })
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);

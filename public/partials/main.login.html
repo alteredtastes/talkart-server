@@ -1,17 +1,19 @@
-<div class="center-block main-modal">
-  <div class="modal-inner animated fadeInDown">
-    <h2>Account Login</h2>
-    <form class="form-inline login-form" name="loginForm" ng-submit="login.submitLogin()">
-      <div class="form-group">
-        <label for="username">Username: </label>
-        <input class="form-control" type="text" id="username" name="username" ng-model="login.username"/>
-        <label for="password">Password: </label>
-        <input class="form-control" type="password" id="password" name="password" ng-model="login.password"/>
-        <input class="btn btn-sm btn-default" type="submit" value="Submit"/>
+<div class="col-md-offset-2 col-md-8">
+  <div class="center-block main-modal">
+    <div class="modal-inner animated fadeInDown">
+      <h2>Account Login</h2>
+      <form class="form-inline login-form" name="loginForm" ng-submit="login.submitLogin()">
+        <div class="form-group">
+          <label for="username">Username: </label>
+          <input class="form-control" type="text" id="username" name="username" ng-model="login.username"/>
+          <label for="password">Password: </label>
+          <input class="form-control" type="password" id="password" name="password" ng-model="login.password"/>
+          <input class="btn btn-sm btn-default" type="submit" value="Submit"/>
+        </div>
+      </form>
+      <div class="inline">
+        <a class="btn btn-lg btn-warning oauth-button" href="auth/instagram" target="_self"><i class="fa fa-instagram fa-3x oauth-icon"></i>   Login with Instagram</a>
       </div>
-    </form>
-    <div class="inline">
-      <a class="btn btn-lg btn-warning oauth-button" href="auth/instagram" target="_self"><i class="fa fa-instagram fa-3x oauth-icon"></i>   Login with Instagram</a>
     </div>
   </div>
 </div>

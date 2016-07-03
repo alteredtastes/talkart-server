@@ -33,15 +33,12 @@
       },
       getUserData: function(id, token) {
         return $http.get('/users/' + id + '/' + token).then(function(data) {
-          console.log('data from the login-service', data.data.username);
-          $state.go('main.user', {user: data.data.username});
-          userData = data.data;
-
+          return userData = data.data;
         })
       },
       returnUserData: function() {
         return userData;
       }
-      }
     }
+  }
 })();

@@ -41,9 +41,9 @@
         }
 
         for (var i = 0; i < Object.keys(commands).length; i++) {
-          console.log('inside the key', Object.keys(commands)[i]);
+          // console.log('inside the key', Object.keys(commands)[i]);
           if(saidWord.indexOf(Object.keys(commands)[i]) != -1) {
-            console.log('caught key is = ', Object.keys(commands)[i]);
+            // console.log('caught key is = ', Object.keys(commands)[i]);
             vcmd = {};
             a = 1;
             key = 'word' + a.toString();
