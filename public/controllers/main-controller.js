@@ -5,8 +5,19 @@
     .module('talkart')
     .controller("MainController", MainController);
 
-  function MainController(Sketch, LoginService, $stateParams) {
+  function MainController(LoginService, MonitorService, $stateParams, $scope) {
     var vm = this;
+    vm.validCmds = [];
+
+    function validCmdsChanged(validCmds) {
+      vm.validCmds = validCmds;
+    }
+
+    MonitorService.onValidCmdsChanged(validCmdsChanged);
+
+    $scope.$on('$destroy', function() {
+      MonitorService.offValidCmdsChanged(validCmdsChanged);
+    });
 
     if($stateParams.user) {
       vm.data = LoginService.returnUserData();

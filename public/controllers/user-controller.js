@@ -5,7 +5,7 @@
     .module('talkart')
     .controller("UserController", UserController);
 
-  function UserController(Sketch, LoginService, $stateParams) {
+  function UserController(Sketch, LoginService, MonitorService, $stateParams) {
     var vm = this;
 
     if($stateParams.user) {

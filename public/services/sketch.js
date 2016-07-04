@@ -5,7 +5,7 @@
     .module('talkart')
     .factory('Sketch', Sketch);
 
-  function Sketch(p5, commands) {
+  function Sketch(p5, commands, MonitorService) {
 
     return function(p) {
       p.myRec = new p5.SpeechRec();
@@ -32,23 +32,27 @@
 
       p.parseResult = function() {
         saidWord = p.myRec.resultString.split(' ').pop();
+        // MonitorService.setLogWord(saidWord);
+
         if(saidWord.indexOf('stop')!==-1) {
-          console.log('caught stop');
+          // MonitorService.setCapturedCmd(saidWord);
           commands['stop']();
           saidWord = '';
           cmds = '';
           vcmd = {};
         }
 
-        for (var i = 0; i < Object.keys(commands).length; i++) {
-          // console.log('inside the key', Object.keys(commands)[i]);
-          if(saidWord.indexOf(Object.keys(commands)[i]) != -1) {
-            // console.log('caught key is = ', Object.keys(commands)[i]);
+        var currentKeys = Object.keys(commands);
+        MonitorService.setValidCmds(currentKeys);
+        for (var i = 0; i < currentKeys.length; i++) {
+          console.log('inside the key', currentKeys[i]);
+          if(saidWord.indexOf(currentKeys[i]) != -1) {
+            // MonitorService.setCapturedCmd(saidWord);
             vcmd = {};
             a = 1;
             key = 'word' + a.toString();
-            vcmd.key = Object.keys(commands)[i];
-            cmds = commands[Object.keys(commands)[i]];
+            vcmd.key = currentKeys[i];
+            cmds = commands[currentKeys[i]];
             a++;
           }
         }

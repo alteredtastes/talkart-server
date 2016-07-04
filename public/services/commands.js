@@ -12,8 +12,16 @@
       stop: function() {
         return 'this is the stop key'
       },
-      create: function() {
-        return 'this is the create key'
+      create: {
+        circle: function() {
+          return 'this is the create -> circle sequence'
+        },
+        rect: function() {
+          return 'this is the create -> rectangle sequence'
+        },
+        line: function() {
+          return 'this is the create -> line sequence'
+        }
       },
       transform: function(){
         return 'this is the transform key'
@@ -24,9 +32,9 @@
       // makeShapeCircle: function(p) {
       //   shape = p.ellipse(50,50,50,50);
       // },
-      giveShapeCircle: function() {
-        return shape;
-      }
+      // giveShapeCircle: function() {
+      //   return shape;
+      // }
     }
   }
 })();
