@@ -29,7 +29,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/">
                   TalkArt
                 </a>
             </div>
@@ -44,14 +44,16 @@
                     <li>
                         <a href="" target="_self">Logout</a>
                     </li>
-                    <li ng-repeat="command in main.validCmds" class="animated bounce">
+                  </ul>
+                  <ul class="nav navbar-nav pull-right bg-danger">
+                    <li ng-repeat="command in main.validCmds track by $index" class="animated bounce pull-right">
                       <a>
                         <span class="text text-uppercase">
                           {{command}}
                         </span>
                       </a>
                     </li>
-                </ul>
+                  </ul>
             </div>
         </div>
     </nav>

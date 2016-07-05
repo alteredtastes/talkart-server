@@ -7,10 +7,12 @@
 
   function MainController(LoginService, MonitorService, $stateParams, $scope) {
     var vm = this;
-    vm.validCmds = [];
+    vm.newCmds = {};
 
-    function validCmdsChanged(validCmds) {
-      vm.validCmds = validCmds;
+    function validCmdsChanged(cmdObj) {
+      vm.newCmds = cmdObj;
+      vm.validCmds = cmdObj.validCmds;
+      vm.loggedCmd = cmdObj.loggedCmd;
     }
 
     MonitorService.onValidCmdsChanged(validCmdsChanged);

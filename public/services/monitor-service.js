@@ -9,8 +9,12 @@
 
     var self = this;
     this.subscribers = [];
-    this.validCmds = ['stop','create','transform','erase'];
-
+    this.validCmds = {
+      validCmds: [],
+      logWord: '',
+      capturedCmd: '',
+      captureId: '',
+    }
 
     function onValidCmdsChanged(subscriber) {
       subscriber(self.validCmds);
@@ -30,19 +34,11 @@
       });
     }
 
-    function setValidCmds(arr) {
-      return self.validCmds = arr;
+    function setValidCmds(obj) {
+      return self.validCmds = obj;
     }
 
     setInterval(function(){
-      // self.validCmds.push(self.validCmds[self.validCmds.length - 1] + "o");
-
-
-      if(self.validCmds.length > 5) {
-        self.validCmds.splice(0, 1);
-      }
-
-      self.validCmds = angular.copy(self.validCmds);
 
       $rootScope.$evalAsync(notifyValidCmdsChanged);
     }, 1000);
