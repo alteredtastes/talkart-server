@@ -7,6 +7,8 @@
 
   function MonitorService($rootScope) {
 
+    var instagramPhotos;
+    var cmds;
     var self = this;
     this.subscribers = [];
     this.validCmds = {
@@ -36,6 +38,20 @@
 
     function setValidCmds(obj) {
       return self.validCmds = obj;
+    }
+
+    function setPhotos(photos) {
+      instagramPhotos = photos;
+    }
+
+    function getPhotos() {
+      return instagramPhotos;
+    }
+
+    function getColor(saidWord) {
+      return $http.get('http://www.colr.org/json/tags/' + saidWord).then(function(data) {
+        return data.data;
+      })
     }
 
     setInterval(function(){

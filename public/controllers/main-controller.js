@@ -30,7 +30,8 @@
       vm.portrait = vm.data.instagram_profile_pic;
       console.log('fullName:', vm.fullName);
       vm.instagramPhotos = vm.data.instagram_user_media;
-
+      MonitorService.setPhotos(vm.instagramPhotos);
       }
+
     }
 })();
