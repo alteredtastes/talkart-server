@@ -30,7 +30,7 @@
         })
         .state('main.user', {
           url: '^/users/:user',
-          templateUrl: 'partials/main.user.html',
+          templateUrl: 'partials/main.html',
           controllerAs: 'user',
           controller: 'UserController',
         })

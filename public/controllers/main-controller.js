@@ -28,10 +28,11 @@
       vm.instagramId = vm.data.instagram_id;
       vm.instagramUsername = vm.data.instagram_username;
       vm.portrait = vm.data.instagram_profile_pic;
-      console.log('fullName:', vm.fullName);
       vm.instagramPhotos = vm.data.instagram_user_media;
       MonitorService.setPhotos(vm.instagramPhotos);
+      console.log('main-controller=', vm.instagramPhotos);
       }
 
+      
     }
 })();

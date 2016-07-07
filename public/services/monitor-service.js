@@ -16,6 +16,7 @@
       logWord: '',
       capturedCmd: '',
       captureId: '',
+      photos: [],
     }
 
     function onValidCmdsChanged(subscriber) {
@@ -38,10 +39,11 @@
 
     function setValidCmds(obj) {
       return self.validCmds = obj;
+
     }
 
-    function setPhotos(photos) {
-      instagramPhotos = photos;
+    function setPhotos(arr) {
+      instagramPhotos = arr;
     }
 
     function getPhotos() {
@@ -54,6 +56,18 @@
       })
     }
 
+    function runFunction(p) {
+      //run through an array of promises pushed with addToSketch
+      // Promise.all(promises);
+      return p.ellipse(50,50,50,50);
+    }
+
+    function addToSketch(p) {
+      //consider creating an array of dynamic variables with each elements id.
+      //access their dynamic variables with indexOf('dx' + elementId)
+      return 'each commands function ends with this method, the result is pushed to a promise array'
+    }
+
     setInterval(function(){
 
       $rootScope.$evalAsync(notifyValidCmdsChanged);
@@ -63,6 +77,9 @@
       onValidCmdsChanged: onValidCmdsChanged,
       offValidCmdsChanged: offValidCmdsChanged,
       setValidCmds: setValidCmds,
+      setPhotos: setPhotos,
+      getPhotos: getPhotos,
+      runFunction: runFunction,
     }
   }
 })();
