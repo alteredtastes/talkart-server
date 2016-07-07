@@ -5,7 +5,7 @@
     .module('talkart')
     .factory('commands', commands);
 
-  function commands(p5, MonitorService, LoginService, $http) {
+  function commands(p5, MonitorService, LoginService, $http, $location) {
     var shape;
     var photoUrls;
     return {
@@ -19,8 +19,7 @@
         background: {
           photo: {
             Instagram: function(p) {
-
-
+              window.location.href = 'auth/instagram';
             },
             Flickr: function() {
               return 'return flickr photos';

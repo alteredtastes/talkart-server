@@ -5,9 +5,10 @@
     .module('talkart')
     .factory('Sketch', Sketch);
 
-  function Sketch(p5, commands, MonitorService, LoginService, $timeout) {
+  function Sketch(p5, commands, MonitorService, LoginService, $timeout, $stateParams) {
 
     return function(p, scope) {
+
       p.myRec = new p5.SpeechRec();
       p.myRec.continuous = true;
       p.myRec.interimResults = true;
@@ -26,8 +27,9 @@
       insta = MonitorService.getPhotos();
 
       p.preload = function() {
-        bgs = ['blue'];
+        bgs = ['rgba(0,255,0, 0.0)'];
         if(insta){
+          b++;
           for (var i = 0; i < insta.length; i++) {
             bgs.push(p.loadImage(insta[i]));
           }
@@ -35,8 +37,10 @@
       }
 
       p.setup = function() {
-        p.createCanvas(640, 640);
-        p.background(bgs[b])
+        var width = 640;
+        var height = 640;
+        p.createCanvas(640, 640).position((p.windowWidth - 640) / 2, (p.windowHeight - 640) / 2);
+        p.background(bgs[b]);
         p.myRec.onResult = p.parseResult;
         p.myRec.start();
       }
@@ -56,10 +60,9 @@
           p.background(bgs[b]);
         }
 
-        if(saidWord.indexOf('next') !== -1) {
-          p.background(bgs[b++])
+        if(saidWord.indexOf('erase') !== -1) {
+          p.background('');
         }
-
 
         if(saidWord.indexOf('stop') !== -1) {
           commands['stop']();

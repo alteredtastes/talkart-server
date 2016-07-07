@@ -59,7 +59,7 @@
     function runFunction(p) {
       //run through an array of promises pushed with addToSketch
       // Promise.all(promises);
-      return p.ellipse(50,50,50,50);
+      return p.ellipse(50,50,50,50).rect(50,50,50,50)
     }
 
     function addToSketch(p) {
