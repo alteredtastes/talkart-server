@@ -12,53 +12,54 @@
       p.myRec.continuous = true;
       p.myRec.interimResults = true;
 
-      var insta;
-      var bg;
-      var bgs = [];
+      var insta = [];
+      var bgs;
       var a = 1;
       var b = 0;
       var index = 0;
       var saidWord;
+      var prevWord;
       var allCmds = {};
       var currentCmdSet = commands;
       allCmds.validCmds = Object.keys(currentCmdSet);
       MonitorService.setValidCmds(allCmds);
-      var insta = MonitorService.getPhotos();
-      console.log('this is in the sketch', insta);
+      insta = MonitorService.getPhotos();
 
       p.preload = function() {
-        console.log('inside the preload');
-        bg = p.loadImage('https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/13549590_1045447542216977_624997926_n.jpg?ig_cache_key=MTI4NDUzODg5NTg2MTY4MjMxMA%3D%3D.2.l');
+        bgs = ['blue'];
+        if(insta){
+          for (var i = 0; i < insta.length; i++) {
+            bgs.push(p.loadImage(insta[i]));
+          }
+        }
       }
-
-      // function validCmdsChanged(cmdObj) {
-      //   insta = cmdObj;
-      //
-      // }
-      //
-      // MonitorService.onValidCmdsChanged(validCmdsChanged);
-
-
-      // scope.$on('$destroy', function() {
-      //   MonitorService.offValidCmdsChanged(validCmdsChanged);
-      // });
 
       p.setup = function() {
         p.createCanvas(640, 640);
-        p.background(bg)
+        p.background(bgs[b])
         p.myRec.onResult = p.parseResult;
         p.myRec.start();
       }
 
       p.draw = function() {
         MonitorService.runFunction(p);
-
       }
 
       p.parseResult = function() {
 
         saidWord = p.myRec.resultString.split(' ').pop();
         allCmds.logWord = saidWord;
+        console.log(saidWord);
+
+        if(parseInt(saidWord)) {
+          b = saidWord;
+          p.background(bgs[b]);
+        }
+
+        if(saidWord.indexOf('next') !== -1) {
+          p.background(bgs[b++])
+        }
+
 
         if(saidWord.indexOf('stop') !== -1) {
           commands['stop']();

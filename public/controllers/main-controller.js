@@ -33,6 +33,6 @@
       console.log('main-controller=', vm.instagramPhotos);
       }
 
-      
+
     }
 })();
