@@ -2,7 +2,7 @@
   'use strict'
 
   angular
-    .module('talkart', ['ui.router', 'angular-p5'])
+    .module('talkart', ['ui.router', 'angular-p5', 'ngAnimate'])
 
     .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 

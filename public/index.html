@@ -34,7 +34,7 @@
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+                <!-- <ul class="nav navbar-nav">
                     <li>
                         <a ui-sref="main.register">Register</a>
                     </li>
@@ -44,22 +44,22 @@
                     <li>
                         <a href="" target="_self">Logout</a>
                     </li>
-                  </ul>
-                  <ul class="nav navbar-nav pull-right bg-danger" ng-model="main.logWord">
-                    <a>
-                      <span class="text text-uppercase">
-                        {{main.logWord}}
-                      </span>
-                    </a>
-                  </ul>
-                  <ul class="nav navbar-nav pull-right bg-danger">
-                    <li ng-repeat="command in main.validCmds track by $index" class="animated bounce pull-right">
+                  </ul> -->
+                  <ul class="nav navbar-nav bg-danger commands">
+                    <li ng-repeat="command in main.validCmds track by $index" class="animated bounce">
                       <a>
                         <span class="text text-uppercase">
                           {{command}}
                         </span>
                       </a>
                     </li>
+                  </ul>
+                  <ul class="nav navbar-nav pull-right bg-success" ng-model="main.logWord">
+                    <a>
+                      <span class="text text-uppercase">
+                        {{main.logWord}}
+                      </span>
+                    </a>
                   </ul>
             </div>
         </div>

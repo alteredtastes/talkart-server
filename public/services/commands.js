@@ -9,54 +9,39 @@
     var shape;
     var photoUrls;
     return {
-      stop: function() {
-        return 'this is the stop key'
+      transform: function(p){
+        return 'this is the transform key'
       },
-      // create: function(p) {
-      //   return p.ellipse(50,50,50,50);
-      // },
+      move: {
+
+      },
+      erase: function() {
+        return 'this is the erase key'
+      },
       create: {
         background: {
           photo: {
-            Instagram: function(p) {
+            instagram: function(p) {
               window.location.href = 'auth/instagram';
             },
-            Flickr: function() {
+            flickr: function() {
               return 'return flickr photos';
             },
           },
           color: function(saidWord) {
-            MonitorService.getColor(saidWord).then(function(data) {
-              console.log('array of hex colors by tag', data.colors);
-              console.log('single hex example would be', data.colors[0].hex);
-            })
+            return 'colors';
           }
         },
-        circle: function() {
-          return 'this is the create -> circle sequence'
+        circle: function(p) {
+          return p.ellipse(50,50,50,50);
         },
-        rect: function() {
+        rectangle: function() {
           return 'this is the create -> rectangle sequence'
         },
         line: function() {
           return 'this is the create -> line sequence'
         }
       },
-      transform: function(p){
-        return 'this is the transform key'
-      },
-      erase: function() {
-        return 'this is the erase key'
-      },
-      // move: function(arg, function, p) {
-      //   return p.
-      // }
-      // makeShapeCircle: function(p) {
-      //   shape = p.ellipse(50,50,50,50);
-      // },
-      // giveShapeCircle: function() {
-      //   return shape;
-      // }
     }
   }
 })();

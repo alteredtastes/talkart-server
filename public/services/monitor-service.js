@@ -57,15 +57,16 @@
     }
 
     function runFunction(p) {
-      //run through an array of promises pushed with addToSketch
-      // Promise.all(promises);
-      return p.ellipse(50,50,50,50).rect(50,50,50,50)
+
+      return p;
     }
 
     function addToSketch(p) {
+      console.log('inside the addToSktech');
+
       //consider creating an array of dynamic variables with each elements id.
       //access their dynamic variables with indexOf('dx' + elementId)
-      return 'each commands function ends with this method, the result is pushed to a promise array'
+      MonitorService.runFunction();
     }
 
     setInterval(function(){
@@ -80,6 +81,7 @@
       setPhotos: setPhotos,
       getPhotos: getPhotos,
       runFunction: runFunction,
+      addToSkech: addToSketch,
     }
   }
 })();

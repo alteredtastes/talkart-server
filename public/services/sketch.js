@@ -5,7 +5,7 @@
     .module('talkart')
     .factory('Sketch', Sketch);
 
-  function Sketch(p5, commands, MonitorService, LoginService, $timeout, $stateParams) {
+  function Sketch(p5, commands, MonitorService, LoginService, $timeout, $state) {
 
     return function(p, scope) {
 
@@ -37,21 +37,21 @@
       }
 
       p.setup = function() {
-        var width = 640;
-        var height = 640;
         p.createCanvas(640, 640).position((p.windowWidth - 640) / 2, (p.windowHeight - 640) / 2);
         p.background(bgs[b]);
+        p.ellipse(10,10,10,10);
         p.myRec.onResult = p.parseResult;
         p.myRec.start();
+        MonitorService.runFunction(p);
       }
 
       p.draw = function() {
-        MonitorService.runFunction(p);
       }
 
       p.parseResult = function() {
 
         saidWord = p.myRec.resultString.split(' ').pop();
+        saidWord = saidWord.toLowerCase();
         allCmds.logWord = saidWord;
         console.log(saidWord);
 
@@ -60,8 +60,16 @@
           p.background(bgs[b]);
         }
 
-        if(saidWord.indexOf('erase') !== -1) {
-          p.background('');
+        if(saidWord.indexOf('login') !== -1) {
+          $state.go('main.login');
+        }
+
+        if(saidWord.indexOf('home') !== -1) {
+          window.location.href = '/';
+        }
+
+        if(saidWord.indexOf('register') !== -1) {
+          $state.go('main.register');
         }
 
         if(saidWord.indexOf('stop') !== -1) {
