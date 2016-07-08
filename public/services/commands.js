@@ -5,8 +5,10 @@
     .module('talkart')
     .factory('commands', commands);
 
-  function commands(p5, MonitorService, LoginService, $http, $location) {
+  function commands(p5, MonitorService, LoginService, $http, $location, $timeout) {
     var build = [];
+    var colors = [];
+    var colrorg = [];
     var shape;
     var photoUrls;
     return {
@@ -31,13 +33,20 @@
               },
             },
             color: {
-              process: function(p, prevWord) {
-                return // MonitorService.getColors(prevWord);
-                },
+              run: function(p, bgs, saidWord, test, prevWord) {
+                colors = [];
+                $http.get('http://www.colr.org/json/tag/' + prevWord).then(function(data) {
+                  colrorg = data.data.colors;
+                  for (var i = 0; i < colrorg.length; i++) {
+                    colors.push(colrorg[i].hex);
+                  }
+                  return p.background("#" + colors[0]);
+                });
               },
             },
+          },
           shape: {
-            circle: function(p, a, saidWord, test) {
+            circle: function(p, bgs, saidWord, test, prevWord) {
               test.push(p['ellipse'](30,30,30,30));
 
             },
@@ -60,7 +69,7 @@
           test[0] = p.image(bgs[saidWord],0,0);
           // p.image(bgs[saidWord],0,0);
         },
-        text: function(p, wordsOrWord) {
+        text: function(p, bgs, saidWord, test) {
           return
         },
       },

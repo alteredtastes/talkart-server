@@ -84,9 +84,9 @@
           commands.invalid.collection(p, bgs, saidWord, test);
         }
 
-        if(saidWord.indexOf('capture') !== -1) {
-          // send
-        }
+        // if(prevWord.indexOf('color') !== -1) {
+        //
+        // }
 
         if(saidWord.indexOf('stop') !== -1) {
           // commands.valid['stop']();
@@ -99,7 +99,7 @@
         if(currentCmdSet.hasOwnProperty(saidWord)) {
           allCmds.capturedCmd = saidWord;
           if(typeof currentCmdSet[saidWord] === 'function') {
-            currentCmdSet[saidWord](p, null, saidWord, test);
+            currentCmdSet[saidWord](p, bgs, saidWord, test, prevWord);
             currentCmdSet = commands.valid;
             allCmds.validCmds = Object.keys(currentCmdSet);
           } else {
@@ -109,6 +109,7 @@
           }
         }
         prevWord = saidWord;
+        console.log('in the sketch', prevWord);
       }
     }
   }
