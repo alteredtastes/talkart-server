@@ -62,12 +62,6 @@
         allCmds.logWord = saidWord;
         console.log(saidWord);
 
-        if(saidWord.indexOf('change') !== -1) {
-          g += 35;
-          h += 35;
-          j += 35;
-        }
-
         if(saidWord.indexOf('home') !== -1) {
           window.location.href = '/';
         }
@@ -81,7 +75,7 @@
         }
 
         if(parseInt(saidWord)) {
-          commands.invalid.collection(p, bgs, saidWord, test);
+          commands.invalid.collection(p, bgs, saidWord, test, prevWord);
         }
 
         // if(prevWord.indexOf('color') !== -1) {
@@ -109,7 +103,6 @@
           }
         }
         prevWord = saidWord;
-        console.log('in the sketch', prevWord);
       }
     }
   }

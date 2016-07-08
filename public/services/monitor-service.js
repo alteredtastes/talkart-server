@@ -56,18 +56,29 @@
       })
     }
 
-    function runFunction(p) {
+    function runFunction(p, build, coords) {
+      for (var i = 0; i < build.length; i++) {
+        p[build[i]](
+          coords[i][i],
+          coords[i][i+1],
+          coords[i][i+2],
+          coords[i][i+3],
+          coords[i][i+4],
+          coords[i][i+5],
+          coords[i][i+6]
+        );
+      }
       return p;
     }
 
-    function addToSketch(p) {
-      console.log('inside the addToSktech');
-
-      //consider creating an array of dynamic variables with each elements id.
-      //access their dynamic variables with indexOf('dx' + elementId)
-
-      this.runFunction(p);
-    }
+    // function addToSketch(p) {
+    //   console.log('inside the addToSktech');
+    //
+    //   //consider creating an array of dynamic variables with each elements id.
+    //   //access their dynamic variables with indexOf('dx' + elementId)
+    //
+    //   this.runFunction(p);
+    // }
 
     setInterval(function(){
 
@@ -81,7 +92,7 @@
       setPhotos: setPhotos,
       getPhotos: getPhotos,
       runFunction: runFunction,
-      addToSkech: addToSketch,
+      // addToSkech: addToSketch,
     }
   }
 })();
