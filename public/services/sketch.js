@@ -12,7 +12,11 @@
       p.myRec = new p5.SpeechRec();
       p.myRec.continuous = true;
       p.myRec.interimResults = true;
+      var g = 0;
+      var h = 0;
+      var j = 0;
 
+      var test = [];
       var insta = [];
       var bgs = [];
       var a = 1;
@@ -44,15 +48,26 @@
       }
 
       p.draw = function() {
+        test = [
+          '',
+          p.ellipse(70,70,70,70)
+        ];
         MonitorService.runFunction(p);
       }
 
       p.parseResult = function() {
 
+
         saidWord = p.myRec.resultString.split(' ').pop();
         saidWord = saidWord.toLowerCase();
         allCmds.logWord = saidWord;
         console.log(saidWord);
+
+        if(saidWord.indexOf('change') !== -1) {
+          g += 35;
+          h += 35;
+          j += 35;
+        }
 
         if(saidWord.indexOf('home') !== -1) {
           window.location.href = '/';
@@ -67,7 +82,7 @@
         }
 
         if(parseInt(saidWord)) {
-          commands.invalid.collection(p, bgs, saidWord);
+          commands.invalid.collection(p, bgs, saidWord, test);
         }
 
         if(saidWord.indexOf('capture') !== -1) {

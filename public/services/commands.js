@@ -56,8 +56,9 @@
         },
       },
       invalid: {
-        collection: function(p, bgs, saidWord) {
-          p.image(bgs[saidWord],0,0);
+        collection: function(p, bgs, saidWord, test) {
+          test[0] = p.image(bgs[saidWord],0,0);
+          // p.image(bgs[saidWord],0,0);
         },
         text: function(p, wordsOrWord) {
           return
