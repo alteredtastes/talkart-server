@@ -67,7 +67,11 @@
         }
 
         if(parseInt(saidWord)) {
-          commands.invalid.collection(p, bgs, (saidWord - 1));
+          commands.invalid.collection(p, bgs, saidWord);
+        }
+
+        if(saidWord.indexOf('capture') !== -1) {
+          // send
         }
 
         if(saidWord.indexOf('stop') !== -1) {
@@ -90,6 +94,7 @@
             // MonitorService.setValidCmds(allCmds);
           }
         }
+        prevWord = saidWord;
       }
     }
   }
