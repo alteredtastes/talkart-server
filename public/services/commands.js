@@ -37,9 +37,9 @@
               },
             },
           shape: {
-            circle: function(p) {
-              return
-              // build.push(p['ellipse'](30,30,30,30));
+            circle: function(p, a, saidWord, test) {
+              test.push(p['ellipse'](30,30,30,30));
+
             },
             triangle: function(p){
               return

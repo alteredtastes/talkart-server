@@ -50,9 +50,8 @@
       p.draw = function() {
         test = [
           '',
-          p.ellipse(70,70,70,70)
         ];
-        MonitorService.runFunction(p);
+        // MonitorService.runFunction(p);
       }
 
       p.parseResult = function() {
@@ -100,7 +99,7 @@
         if(currentCmdSet.hasOwnProperty(saidWord)) {
           allCmds.capturedCmd = saidWord;
           if(typeof currentCmdSet[saidWord] === 'function') {
-            currentCmdSet[saidWord](p);
+            currentCmdSet[saidWord](p, null, saidWord, test);
             currentCmdSet = commands.valid;
             allCmds.validCmds = Object.keys(currentCmdSet);
           } else {
