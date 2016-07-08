@@ -14,20 +14,19 @@
       p.myRec.interimResults = true;
 
       var insta = [];
-      var bgs;
+      var bgs = [];
       var a = 1;
       var b = 0;
       var index = 0;
       var saidWord;
       var prevWord;
       var allCmds = {};
-      var currentCmdSet = commands;
+      var currentCmdSet = commands.valid;
       allCmds.validCmds = Object.keys(currentCmdSet);
       MonitorService.setValidCmds(allCmds);
       insta = MonitorService.getPhotos();
 
       p.preload = function() {
-        bgs = ['rgba(0,255,0, 0.0)'];
         if(insta){
           b++;
           for (var i = 0; i < insta.length; i++) {
@@ -37,15 +36,15 @@
       }
 
       p.setup = function() {
+        var width = 640;
+        var height = 640;
         p.createCanvas(640, 640).position((p.windowWidth - 640) / 2, (p.windowHeight - 640) / 2);
-        p.background(bgs[b]);
-        p.ellipse(10,10,10,10);
         p.myRec.onResult = p.parseResult;
         p.myRec.start();
-        MonitorService.runFunction(p);
       }
 
       p.draw = function() {
+        MonitorService.runFunction(p);
       }
 
       p.parseResult = function() {
@@ -55,51 +54,40 @@
         allCmds.logWord = saidWord;
         console.log(saidWord);
 
-        if(parseInt(saidWord)) {
-          b = saidWord;
-          p.background(bgs[b]);
+        if(saidWord.indexOf('home') !== -1) {
+          window.location.href = '/';
         }
 
         if(saidWord.indexOf('login') !== -1) {
           $state.go('main.login');
         }
 
-        if(saidWord.indexOf('home') !== -1) {
-          window.location.href = '/';
-        }
-
         if(saidWord.indexOf('register') !== -1) {
           $state.go('main.register');
         }
 
+        if(parseInt(saidWord)) {
+          commands.invalid.collection(p, bgs, (saidWord - 1));
+        }
+
         if(saidWord.indexOf('stop') !== -1) {
-          commands['stop']();
-          currentCmdSet = commands;
+          // commands.valid['stop']();
+          currentCmdSet = commands.valid;
           allCmds.capturedCmd = 'stop';
-          allCmds.validCmds = Object.keys(commands);
+          allCmds.validCmds = Object.keys(commands.valid);
           MonitorService.setValidCmds(allCmds);
         }
 
         if(currentCmdSet.hasOwnProperty(saidWord)) {
           allCmds.capturedCmd = saidWord;
           if(typeof currentCmdSet[saidWord] === 'function') {
-            var photo = currentCmdSet[saidWord](p);
-            console.log('this is photo', photo);
-            p.background(photo);
-            if(Array.isArray(rtn)) {
-              console.log(rtn[0]);
-            } else {
-              currentCmdSet[saidWord](p);
-              currentCmdSet = commands;
-              allCmds.validCmds = Object.keys(currentCmdSet);
-              MonitorService.setValidCmds(allCmds);
-
-            }
-            // if(currentCmdSet[saidWord(p) ===])
+            currentCmdSet[saidWord](p);
+            currentCmdSet = commands.valid;
+            allCmds.validCmds = Object.keys(currentCmdSet);
           } else {
             currentCmdSet = currentCmdSet[saidWord];
             allCmds.validCmds = Object.keys(currentCmdSet);
-            MonitorService.setValidCmds(allCmds);
+            // MonitorService.setValidCmds(allCmds);
           }
         }
       }

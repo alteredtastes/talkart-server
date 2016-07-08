@@ -57,7 +57,6 @@
     }
 
     function runFunction(p) {
-
       return p;
     }
 
@@ -66,7 +65,8 @@
 
       //consider creating an array of dynamic variables with each elements id.
       //access their dynamic variables with indexOf('dx' + elementId)
-      MonitorService.runFunction();
+      
+      this.runFunction(p);
     }
 
     setInterval(function(){

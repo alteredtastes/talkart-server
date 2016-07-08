@@ -54,12 +54,17 @@
                       </a>
                     </li>
                   </ul>
-                  <ul class="nav navbar-nav pull-right bg-success" ng-model="main.logWord">
-                    <a>
-                      <span class="text text-uppercase">
-                        {{main.logWord}}
-                      </span>
-                    </a>
+                  <ul ng-show="main.loggedIn" class="nav navbar-nav pull-right">
+                    <li>
+                      <a>
+                        <span class="text text-uppercase">
+                        {{main.fullName}}
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <img ng-src="{{main.portrait}}" alt="profile-photo" class="img-circle" style="width: 50px;" />
+                    </li>
                   </ul>
             </div>
         </div>
