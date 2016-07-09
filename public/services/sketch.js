@@ -16,6 +16,11 @@
       var h = 0;
       var j = 0;
 
+
+      var x = 50;
+      var y = 50;
+      var w = 50;
+
       var test = [];
       var insta = [];
       var bgs = [];
@@ -49,9 +54,7 @@
 
       p.draw = function() {
         test = [
-          '',
         ];
-        // MonitorService.runFunction(p);
       }
 
       p.parseResult = function() {
@@ -89,7 +92,9 @@
         if(currentCmdSet.hasOwnProperty(saidWord)) {
           allCmds.capturedCmd = saidWord;
           if(typeof currentCmdSet[saidWord] === 'function') {
-            currentCmdSet[saidWord](p, bgs, saidWord, test, prevWord);
+            var val = currentCmdSet[saidWord](p, bgs, saidWord, test, prevWord);
+            val();
+            console.log(val);
             currentCmdSet = commands.valid;
             allCmds.validCmds = Object.keys(currentCmdSet);
           } else {

@@ -7,11 +7,11 @@
 
   function commands(p5, MonitorService, LoginService, $http, $location, $timeout) {
     var a = 40;
-    var b = 40;
-    var c = 40;
-    var d = 40;
-    var e = null;
-    var f = null;
+    var b = 60;
+    var c = 34;
+    var d = 78;
+    var e = 11;
+    var f = 3;
     var build = [];
     var coords = [];
     var index;
@@ -19,10 +19,29 @@
     var colrorg = [];
     var shape;
     var photoUrls;
+
     return {
       valid: {
-        transform: function(p){
-          return 'this is the transform key'
+        transform: {
+          shape: {
+            circle: { // ng-show for circle in angular and show array of circles currently on the array
+              enlarge: {
+                run: function(prevWord) {
+
+                  return
+                },
+              },
+            },
+            triangle: function () {
+              return
+            },
+            rectangle: function (){
+              return
+            },
+          },
+          background: {
+
+          },
         },
         move: {
 
@@ -58,6 +77,9 @@
               build.push('ellipse');
               coords.push([a, b, c, d, e, f]);
               MonitorService.runFunction(p, build, coords);
+              return function() {
+                return
+              }
             },
             triangle: function(p) {
               build.push('triangle');
