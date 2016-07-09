@@ -78,10 +78,6 @@
           commands.invalid.collection(p, bgs, saidWord, test, prevWord);
         }
 
-        // if(prevWord.indexOf('color') !== -1) {
-        //
-        // }
-
         if(saidWord.indexOf('stop') !== -1) {
           // commands.valid['stop']();
           currentCmdSet = commands.valid;

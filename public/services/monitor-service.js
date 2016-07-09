@@ -58,7 +58,8 @@
 
     function runFunction(p, build, coords) {
       for (var i = 0; i < build.length; i++) {
-        p[build[i]](
+        p[build[i]]
+        (
           coords[i][i],
           coords[i][i+1],
           coords[i][i+2],

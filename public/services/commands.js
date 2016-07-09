@@ -6,6 +6,12 @@
     .factory('commands', commands);
 
   function commands(p5, MonitorService, LoginService, $http, $location, $timeout) {
+    var a = 40;
+    var b = 40;
+    var c = 40;
+    var d = 40;
+    var e = null;
+    var f = null;
     var build = [];
     var coords = [];
     var index;
@@ -50,19 +56,17 @@
           shape: {
             circle: function(p, bgs, saidWord, test, prevWord) {
               build.push('ellipse');
-              var a = 40;
-              var b = 40;
-              var c = 40;
-              var d = 40;
-              var e = null;
-              var f = null;
-              index = coords.push([a, b, c, d, e, f]);
-              // coords.push([40,40,40,40]);
-              MonitorService.runFunction(p, build, coords, index);
+              coords.push([a, b, c, d, e, f]);
+              MonitorService.runFunction(p, build, coords);
             },
-            triangle: function(p){
+            triangle: function(p) {
               build.push('triangle');
-              coords.push([30,30,30,30,30,30]);
+              coords.push([a, b, c, d, e, f]);
+              MonitorService.runFunction(p, build, coords);
+            },
+            rectangle: function(p) {
+              build.push('rect');
+              coords.push([a, b, c, d, e, f]);
               MonitorService.runFunction(p, build, coords);
             },
           },
