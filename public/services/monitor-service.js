@@ -7,7 +7,7 @@
 
   function MonitorService($rootScope) {
 
-    var instagramPhotos;
+    var photoObjs;
     var cmds;
     var self = this;
     this.subscribers = [];
@@ -43,11 +43,11 @@
     }
 
     function setPhotos(arr) {
-      instagramPhotos = arr;
+      return photoObjs = arr;
     }
 
     function getPhotos() {
-      return instagramPhotos;
+      return photoObjs;
     }
 
     function getColor(saidWord) {
@@ -72,15 +72,6 @@
       return p;
     }
 
-    // function addToSketch(p) {
-    //   console.log('inside the addToSktech');
-    //
-    //   //consider creating an array of dynamic variables with each elements id.
-    //   //access their dynamic variables with indexOf('dx' + elementId)
-    //
-    //   this.runFunction(p);
-    // }
-
     setInterval(function(){
 
       $rootScope.$evalAsync(notifyValidCmdsChanged);
@@ -93,7 +84,6 @@
       setPhotos: setPhotos,
       getPhotos: getPhotos,
       runFunction: runFunction,
-      // addToSkech: addToSketch,
     }
   }
 })();

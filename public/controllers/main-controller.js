@@ -14,6 +14,7 @@
       vm.newCmds = cmdObj;
       vm.validCmds = cmdObj.validCmds;
       vm.loggedCmd = cmdObj.loggedCmd;
+      vm.photos = cmdObj.photos;
       if($stateParams.user && !vm.data) {
         vm.data = LoginService.returnUserData();
         vm.username = vm.data.username;
