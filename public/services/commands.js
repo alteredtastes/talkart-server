@@ -6,27 +6,55 @@
     .factory('commands', commands);
 
   function commands(p5, MonitorService, LoginService, $http, $location, $timeout) {
-    var a = 40;
-    var b = 60;
-    var c = 34;
-    var d = 78;
-    var e = 11;
-    var f = 3;
     var build = [];
-    var coords = [];
-    var index;
     var colors = [];
     var colrorg = [];
     var shape;
     var photoUrls;
 
+    var x1 = 50;
+    var y1 = 50;
+    var w = 50;
+    var h = 50;
+
+    var shape, fill, stroke;
+    var coords = {};
+    var dcoords = {};
+
     return {
       valid: {
         transform: {
-          position: {},
+          position: {
+            left: function() {
+              dcoords.one = -1;
+              return 'position'
+            },
+            right:function() {
+              dcoords.one = 1;
+              return 'position'
+            },
+            up: function() {
+              return 'position'
+            },
+            down: function() {
+              return 'position'
+            },
+            closer: function() {
+              return 'position'
+            },
+            further: function() {
+              return 'position'
+            },
+            commit: function() {
+              return 'transform'
+            }
+          },
           size: {},
           fill: {},
           stroke: {},
+          commit: function(){
+            return 'valid'
+          },
         },
         create: {
           background: {
@@ -52,46 +80,69 @@
             },
           },
           shape: {
-            circle: function(p, args) {
-              build.push('ellipse');
-              coords.push([a, b, c, d, e, f]);
-              MonitorService.runFunction(p, build, coords);
-              return 'shape';
+            circle: function() {
+              shape = 'ellipse'; //ellipse(x,y,w,h)
+              coords.one = 50;
+              coords.two = 50;
+              coords.three = 50;
+              coords.four = 50;
+              console.log('inside circle', coords);
+              return 'shape'
             },
-            triangle: function(p, args) {
-              build.push('triangle');
-              coords.push([a, b, c, d, e, f]);
-              MonitorService.runFunction(p, build, coords);
-              return 'shape';
+            rectangle: function() {
+              shape = 'rect'; //rect(x,y,z,w,h)
+              coords.one = 200;
+              coords.two = 100;
+              coords.three = 1;
+              coords.four = 300;
+              coords.five = 300;
+              return 'shape'
             },
-            rectangle: function(p, args) {
-              build.push('rect');
-              coords.push([a, b, c, d, e, f]);
-              MonitorService.runFunction(p, build, coords);
-              return {
-                type: 'shape',
-                arg: 'rect',
-              };
+            triangle: function() {
+              shape = 'triangle'; //triangle(x1,y1,x2,y2,x3,y3)
+              return 'shape'
+            },
+            line: function() { //line(x1,y1,x2,y2)
+              shape = 'line';
+              return 'shape'
             },
           },
           text: {
-            word: function(p, args) {
-              return //capture word to pass to this.invalid.text(p, word)
+            word: function() {
+              return //capture word to pass to this.unsaid.text(p, word)
             },
-            phrase: function(p, args) {
-              return //create an array of strings to pass to this.invalid.text(p, arr);
+            phrase: function() {
+              return //create an array of strings to pass to this.unsaid.text(p, arr);
             },
           },
         },
       },
-      invalid: {
+      unsaid: {
         collection: function(p, args) {
           args.test[0] = p.image(args.bgs[(args.saidWord - 1)],0,0);
-          // p.image(args.bgs[args.saidWord],0,0);
         },
-        text: function(p, args) {
-          return
+        getShape: function() {
+          console.log('get function', shape);
+          return shape;
         },
+        getCoords: function() {
+          return coords;
+        },
+        getDcoords: function() {
+          return dcoords;
+        },
+        getFill: function() {
+          return fill;
+        },
+        getStroke: function() {
+          return stroke;
+        },
+        setCoords: function(obj) {
+          coords = obj;
+        },
+        // setDcoords: function(obj) {
+        //   dcoords = obj;
+        // },
       },
     }
   }

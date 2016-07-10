@@ -7,8 +7,20 @@
 
   function MonitorService($rootScope) {
 
+    // var coords = {
+    //   x1: 50,
+    //   y1: 50,
+    //   x2: 0,
+    //   y2: 0,
+    //   x3: 0,
+    //   y3: 0,
+    //   z: 0,
+    //   w: 50,
+    //   h: 50,
+    // };
+
     var photoObjs;
-    var cmds;
+    var action;
     var self = this;
     this.subscribers = [];
     this.validCmds = {
@@ -39,7 +51,6 @@
 
     function setValidCmds(obj) {
       return self.validCmds = obj;
-
     }
 
     function setPhotos(arr) {
@@ -56,20 +67,12 @@
       })
     }
 
-    function runFunction(p, build, coords) {
-      for (var i = 0; i < build.length; i++) {
-        p[build[i]]
-        (
-          coords[i][i],
-          coords[i][i+1],
-          coords[i][i+2],
-          coords[i][i+3],
-          coords[i][i+4],
-          coords[i][i+5],
-          coords[i][i+6]
-        );
-      }
-      return p;
+    function getCoords() {
+      return coords;
+    }
+
+    function runFunction(command) {
+
     }
 
     setInterval(function(){
@@ -83,6 +86,7 @@
       setValidCmds: setValidCmds,
       setPhotos: setPhotos,
       getPhotos: getPhotos,
+      getCoords: getCoords,
       runFunction: runFunction,
     }
   }
