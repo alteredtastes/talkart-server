@@ -46,7 +46,17 @@
                     </li>
                   </ul> -->
                   <ul class="nav navbar-nav bg-danger commands">
-                    <li ng-repeat="command in main.validCmds track by $index" class="animated bounce">
+                    <li class="animated bounce" ng-show="main.capturedCmd == 'color'">
+                      <a>
+                        <span class="text text">
+                          <strong>Name a color or a colorful thing.</strong>
+                        </span>
+                        <br />
+                        <span class="text" ng-show="main.logWord != 'color'">Your word is: <strong><span class="text-uppercase bg-default">"{{main.logWord}}".</span></strong><br />
+                         When ready, say <strong>"GO".</strong></span></span>
+                      </a>
+                    </li>
+                    <li ng-repeat="command in main.validCmds track by $index" class="animated bounce" ng-show="main.capturedCmd != 'color'">
                       <a>
                         <span class="text text-uppercase">
                           {{command}}

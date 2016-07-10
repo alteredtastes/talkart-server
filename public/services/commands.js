@@ -39,7 +39,7 @@
               },
             },
             color: {
-              run: function(p, args) {
+              go: function(p, args) {
                 colors = [];
                 $http.get('http://www.colr.org/json/tag/' + args.prevWord).then(function(data) {
                   colrorg = data.data.colors;

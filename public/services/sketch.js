@@ -74,6 +74,7 @@
         args.saidWord = args.saidWord.toLowerCase();
         allCmds.logWord = args.saidWord;
         console.log(args.saidWord);
+        MonitorService.setValidCmds(allCmds);
 
         if(args.saidWord.indexOf('home') !== -1) {
           window.location.href = '/';

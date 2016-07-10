@@ -13,8 +13,9 @@
     function validCmdsChanged(cmdObj) {
       vm.newCmds = cmdObj;
       vm.validCmds = cmdObj.validCmds;
-      vm.loggedCmd = cmdObj.loggedCmd;
+      vm.logWord = cmdObj.logWord;
       vm.photos = cmdObj.photos;
+      vm.capturedCmd = cmdObj.capturedCmd;
       if($stateParams.user && !vm.data) {
         vm.data = LoginService.returnUserData();
         vm.username = vm.data.username;
