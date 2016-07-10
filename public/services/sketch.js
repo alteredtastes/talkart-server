@@ -53,11 +53,11 @@
       }
 
       p.draw = function() {
-        shape = commands.unsaid.getShape(); //returns string
-        coords = commands.unsaid.getCoords();  //returns obj
-        dcoords = commands.unsaid.getDcoords();   //returns obj
-        fill = commands.unsaid.getFill();   //returns hex
-        stroke = commands.unsaid.getStroke();   //returns int 1-10
+        shape = commands.hidden.getShape(); //returns string
+        coords = commands.hidden.getCoords();  //returns obj
+        dcoords = commands.hidden.getDcoords();   //returns obj
+        fill = commands.hidden.getFill();   //returns hex
+        stroke = commands.hidden.getStroke();   //returns int 1-10
 
         if(fill) {
           p.fill(fill);
@@ -80,7 +80,7 @@
             (coords.seven += (dcoords.seven || null)),
             (coords.eight += (dcoords.eight || null))
           );
-          commands.unsaid.setCoords(coords);
+          commands.hidden.setCoords(coords);
         } else if(shape) {
           p[shape](
             coords.one,
@@ -119,19 +119,11 @@
         }
 
         if(args.saidWord.indexOf('commit') !== -1) {
-          commands.unsaid(setShape)(shape, coords, dcoords, fill, stroke);
+          commands.hidden(setShape)(shape, coords, dcoords, fill, stroke);
         }
 
         if(parseInt(args.saidWord)) {
-          commands.unsaid.collection(p, args);
-        }
-
-        if(args.saidWord.indexOf('stop') !== -1) {
-          // commands.valid['stop']();
-          currentCmdSet = commands.valid;
-          allCmds.capturedCmd = 'stop';
-          allCmds.validCmds = Object.keys(commands.valid);
-          MonitorService.setValidCmds(allCmds);
+          commands.hidden.collection(p, args);
         }
 
         if(currentCmdSet.hasOwnProperty(args.saidWord)) {
@@ -144,7 +136,11 @@
               currentCmdSet = commands.valid.transform;
               allCmds.validCmds = Object.keys(currentCmdSet);
             }
-            if(type === 'position'){
+            if(type === 'stop move'){
+              currentCmdSet = commands.hidden.stopMove;
+              allCmds.validCmds = Object.keys(currentCmdSet);
+            }
+            if(type === 'position') {
               currentCmdSet = commands.valid.transform.position;
               allCmds.validCmds = Object.keys(currentCmdSet);
             }

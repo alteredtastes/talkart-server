@@ -78,7 +78,7 @@
     setInterval(function(){
 
       $rootScope.$evalAsync(notifyValidCmdsChanged);
-    }, 1000);
+    }, 300);
 
     return {
       onValidCmdsChanged: onValidCmdsChanged,

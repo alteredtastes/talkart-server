@@ -27,23 +27,19 @@
           position: {
             left: function() {
               dcoords.one = -1;
-              return 'position'
+              return 'stop move'
             },
             right:function() {
               dcoords.one = 1;
-              return 'position'
+              return 'stop move'
             },
             up: function() {
-              return 'position'
+              dcoords.two = -1;
+              return 'stop move'
             },
             down: function() {
-              return 'position'
-            },
-            closer: function() {
-              return 'position'
-            },
-            further: function() {
-              return 'position'
+              dcoords.two = 1;
+              return 'stop move'
             },
             commit: function() {
               return 'transform'
@@ -109,17 +105,23 @@
           },
           text: {
             word: function() {
-              return //capture word to pass to this.unsaid.text(p, word)
+              return //capture word to pass to this.hidden.text(p, word)
             },
             phrase: function() {
-              return //create an array of strings to pass to this.unsaid.text(p, arr);
+              return //create an array of strings to pass to this.hidden.text(p, arr);
             },
           },
         },
       },
-      unsaid: {
+      hidden: {
         collection: function(p, args) {
           args.test[0] = p.image(args.bgs[(args.saidWord - 1)],0,0);
+        },
+        stopMove: {
+          stop: function() {
+            dcoords = {};
+            return 'position'
+          },
         },
         getShape: function() {
           console.log('get function', shape);
