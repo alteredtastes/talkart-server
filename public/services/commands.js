@@ -41,11 +41,18 @@
               dcoords.two = 1;
               return 'stop move'
             },
-            commit: function() {
-              return 'transform'
+            stay: function() {
+              return 'stay'
             }
           },
-          size: {},
+          size: {
+            shrink: function() {
+              return
+            },
+            enlarge: function() {
+              return
+            },
+          },
           fill: {},
           stroke: {},
           commit: function(){

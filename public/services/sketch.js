@@ -53,11 +53,15 @@
       }
 
       p.draw = function() {
-        shape = commands.hidden.getShape(); //returns string
-        coords = commands.hidden.getCoords();  //returns obj
-        dcoords = commands.hidden.getDcoords();   //returns obj
-        fill = commands.hidden.getFill();   //returns hex
-        stroke = commands.hidden.getStroke();   //returns int 1-10
+        shape = commands.hidden.getShape();
+        coords = commands.hidden.getCoords();
+        dcoords = commands.hidden.getDcoords();
+        fill = commands.hidden.getFill();
+        stroke = commands.hidden.getStroke();
+
+        // if(args.bgs) {
+        //   p['background'](args.bgs[b]);
+        // }
 
         if(fill) {
           p.fill(fill);
@@ -67,9 +71,8 @@
           p.stroke(stroke);
         }
 
-        // console.log(coords);
-
-        if(dcoords.one && shape) {
+        if(Object.keys(dcoords) && shape) {
+          p.clear();
           p[shape](
             (coords.one += (dcoords.one || null)),
             (coords.two += (dcoords.two || null)),
@@ -93,9 +96,6 @@
             coords.eight
           );
         }
-
-
-
       }
 
       p.parseResult = function() {
@@ -118,10 +118,6 @@
           $state.go('main.register');
         }
 
-        if(args.saidWord.indexOf('commit') !== -1) {
-          commands.hidden(setShape)(shape, coords, dcoords, fill, stroke);
-        }
-
         if(parseInt(args.saidWord)) {
           commands.hidden.collection(p, args);
         }
@@ -132,7 +128,7 @@
             var type = currentCmdSet[args.saidWord](p,args);
             currentCmdSet = commands.valid;
             allCmds.validCmds = Object.keys(currentCmdSet);
-            if(type === 'shape' || type === 'transform'){
+            if(type === 'shape' || type === 'transform' || type === 'stay'){
               currentCmdSet = commands.valid.transform;
               allCmds.validCmds = Object.keys(currentCmdSet);
             }
@@ -147,7 +143,7 @@
           } else {
             currentCmdSet = currentCmdSet[args.saidWord];
             allCmds.validCmds = Object.keys(currentCmdSet);
-            // MonitorService.setValidCmds(allCmds);
+            MonitorService.setValidCmds(allCmds);
           }
         }
         args.prevWord = args.saidWord;
