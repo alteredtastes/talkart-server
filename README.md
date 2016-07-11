@@ -24,7 +24,7 @@ Example voice-command sequences:
 
 "SIX" - Changes background Instagram photo to the 6th photo in photo selection at right panel.
   
-"CREATE" - "BACKGROUND" - "COLOR" - [Prompt shows for name of a color or of something colorful, ex. "sky"] - "GO" - Runs Colr.org call for hex values related to word.  
+"CREATE" - "BACKGROUND" - "COLOR" - [Prompt to capture name of color or of something colorful, ex. "sky"] - "GO" - Runs Colr.org call for hex values related to word.  
   
 "CREATE" - "SHAPE" - "CIRCLE" - Drops circle onto canvas, then shows transform options for that shape.  
   
