@@ -1,4 +1,4 @@
-#talkart
+#TalkArt
 
 A voice-command digital illustrator. Valid commands update dynamically in upper left of screen, notifying user of available options. Incorporates Instagram API and authentication, Colr.org API calls for custom hex arrays, and p5.js for speech library and dropping modifiable shapes to canvas.
 
