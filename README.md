@@ -20,13 +20,13 @@ Example command sequences:
   
 "CREATE" - "SHAPE" - "CIRCLE" - Drops circle onto canvas, then shows transform options for that shape.  
   
-TRANSFORM -> "POSITION" - "RIGHT" - moves circle right - "STOP" - circle stops, presents position options again. 
+TRANSFORM --> "POSITION" - "RIGHT" - moves circle right - "STOP" - circle stops, presents position options again. 
   
-"POSITION" - "STAY" - leaves shape in current position, then presents other transform options.  
+POSITION --> "STAY" - leaves shape in current position, then presents other transform options.  
   
-"TRANSFORM" -> "SIZE" - "ENLARGE" - starts enlargening shape - "STOP" - shape stops size change, presents size options again.
+TRANSFORM --> "SIZE" - "ENLARGE" - starts enlargening shape - "STOP" - shape stops size change, presents size options again.
   
-SIZE -> "STAY" - leaves shape at current size, then presents other transform options. 
+SIZE --> "STAY" - leaves shape at current size, then presents other transform options. 
   
-"TRANSFORM" -> "COMMIT" - changes valid commands to the parent set of "CREATE" and "TRANSFORM".  
+TRANSFORM --> "COMMIT" - changes valid commands to the parent set, CREATE and TRANSFORM.
   
