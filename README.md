@@ -20,7 +20,7 @@ Example command sequences:
   
 "CREATE" - "SHAPE" - "CIRCLE" - Drops circle onto canvas, then shows transform options for that shape.  
   
-TRANSFORM -> "POSITION" - "RIGHT" - moves circle right - "STOP - circle stops, presents position options again. 
+TRANSFORM -> "POSITION" - "RIGHT" - moves circle right - "STOP" - circle stops, presents position options again. 
   
 "POSITION" - "STAY" - leaves shape in current position, then presents other transform options.  
   
