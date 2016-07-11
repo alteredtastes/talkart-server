@@ -1,3 +1,3 @@
 #talkart
 
-<img src="https://cloud.githubusercontent.com/assets/14845097/16726858/49aae57a-4713-11e6-9580-cea66d3c3734.png" width="500px"/>
+<img src="https://cloud.githubusercontent.com/assets/14845097/16727089/33fb74fa-4714-11e6-9660-c4be84f05d06.png" width="500px"/>
