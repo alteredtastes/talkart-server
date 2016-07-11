@@ -12,7 +12,9 @@ Example command sequences:
   
 "REGISTER" - drops down registration window.  
   
-"CREATE" - "BACKGROUND" - "PHOTO" - "INSTAGRAM" - Runs Instagram OAuth and returns user photos for backgrounds.  
+"CREATE" - "BACKGROUND" - "PHOTO" - "INSTAGRAM" - Runs Instagram OAuth and returns user photos for backgrounds. 
+
+"SIX" - Changes photo in background to the 6th photo in user's photo selection.
   
 "CREATE" - "BACKGROUND" - "COLOR" - [Prompt for name of color or something colorful, ex. "sky"] - "GO" - Runs Colr.org call for hex values related to word.  
   
