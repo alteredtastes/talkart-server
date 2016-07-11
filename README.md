@@ -2,7 +2,7 @@
 
 talkart.herokuapp.com  
   
-Requirements:
+Requirements:  
 Recent version of Google Chrome.  
 Instagram username - *Note: If you would like to incorporate your Instagram photos, send me your Instagram username and I will happily add it to the list of authorized TalkArt sandbox users.
 
