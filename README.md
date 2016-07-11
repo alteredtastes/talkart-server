@@ -6,6 +6,8 @@ A voice-command digital illustrator. Valid commands update dynamically in upper 
 
 Example command sequences:  
   
+"HOME" - reloads the application.
+  
 "LOGIN" - drops down login window.  
   
 "REGISTER" - drops down registration window.  
