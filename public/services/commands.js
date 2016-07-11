@@ -7,7 +7,6 @@
 
   function commands(p5, MonitorService, LoginService, $http, $location, $timeout) {
     var build = [];
-    var colors = [];
     var colrorg = [];
     var shape;
     var photoUrls;
@@ -18,6 +17,10 @@
     var h = 50;
 
     var shape, fill, stroke;
+    var bgIndex = 0;
+    var backgrounds = [];
+    var photos = [];
+    var colors = [];
     var coords = {};
     var dcoords = {};
 
@@ -43,14 +46,21 @@
             },
             stay: function() {
               return 'stay'
-            }
+            },
           },
           size: {
-            shrink: function() {
-              return
+            bigger: function() {
+              dcoords.three = .4;
+              dcoords.four = .4;
+              return 'stop size'
             },
-            enlarge: function() {
-              return
+            smaller: function() {
+              dcoords.three = -.4;
+              dcoords.four = -.4;
+              return 'stop size'
+            },
+            stay: function() {
+              return 'stay'
             },
           },
           fill: {},
@@ -62,22 +72,29 @@
         create: {
           background: {
             photo: {
-              instagram: function(p, args) {
-                window.location.href = 'auth/instagram';
+              instagram: function() {
+                if(photos.length > 0) {
+                  backgrounds = photos;
+                } else {
+                  window.location.href = 'auth/instagram';
+                }
               },
               flickr: function(p, args) {
                 return 'return flickr photos';
               },
+              cancel: function() {
+                return 'cancel';
+              }
             },
             color: {
               go: function(p, args) {
                 colors = [];
                 $http.get('http://www.colr.org/json/tag/' + args.prevWord).then(function(data) {
                   colrorg = data.data.colors;
-                  for (var i = 0; i < colrorg.length; i++) {
-                    colors.push(colrorg[i].hex);
+                  for (var i = 0; i < 15; i++) {
+                    colors.push('#' + colrorg[i].hex);
                   }
-                  return p.background("#" + colors[0]);
+                  backgrounds = colors;
                 });
               },
             },
@@ -112,27 +129,51 @@
           },
           text: {
             word: function() {
-              return //capture word to pass to this.hidden.text(p, word)
+              return
             },
             phrase: function() {
-              return //create an array of strings to pass to this.hidden.text(p, arr);
+              return
             },
           },
         },
       },
       hidden: {
-        collection: function(p, args) {
-          args.test[0] = p.image(args.bgs[(args.saidWord - 1)],0,0);
-        },
         stopMove: {
           stop: function() {
             dcoords = {};
             return 'position'
           },
         },
+        stopSize: {
+          stop: function() {
+            dcoords = {};
+            return 'size'
+          }
+        },
+        setBackgrounds: function(arr) {
+          backgrounds = arr;
+        },
+        getBackgrounds: function() {
+          return backgrounds;
+        },
+        setPhotos: function(arr) {
+          photos = arr;
+        },
+        setBgIndex: function(saidInt) {
+          if(saidInt){
+            bgIndex = saidInt - 1;
+          } else {
+            bgIndex = 0;
+          }
+        },
+        getBgIndex: function() {
+          return bgIndex;
+        },
         getShape: function() {
-          console.log('get function', shape);
           return shape;
+        },
+        setCoords: function(obj) {
+          coords = obj;
         },
         getCoords: function() {
           return coords;
@@ -146,12 +187,6 @@
         getStroke: function() {
           return stroke;
         },
-        setCoords: function(obj) {
-          coords = obj;
-        },
-        // setDcoords: function(obj) {
-        //   dcoords = obj;
-        // },
       },
     }
   }

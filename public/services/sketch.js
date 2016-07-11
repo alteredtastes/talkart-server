@@ -21,24 +21,49 @@
       }
 
       var shape, fill, stroke;
+      var bgIndex = 0;
+      var backgrounds = [];
       var coords = {};
       var dcoords = {};
+      p.build = [];
 
       var insta = [];
-      var b;
       var allCmds = {};
       allCmds.photos = [];
       var currentCmdSet = commands.valid;
       allCmds.validCmds = Object.keys(currentCmdSet);
       insta = MonitorService.getPhotos();
 
+      function Shape (shape, fill, stroke, c1, c2, c3, c4, c5, c6, c7, c8) {
+        this.shape = shape;
+        this.fill = fill;
+        this.stroke = stroke;
+        this.c1 = c1;
+        this.c2 = c2;
+        this.c3 = c3;
+        this.c4 = c4;
+        this.c5 = c5;
+        this.c6 = c6;
+        this.c7 = c7;
+        this.c8 = c8;
+        this.display = function() {
+          if (this.stroke) {
+            p.stroke(this.stroke);
+          }
+          if (this.fill) {
+            p.fill(this.fill);
+          }
+          p[this.shape](this.c1, this.c2, this.c3, this.c4, this.c5, this.c6, this.c7, this.c8);
+        }
+      }
+
       p.preload = function() {
         if(insta){
-          b = 1;
           for (var i = 0; i < insta.length; i++) {
             args.bgs.push(p.loadImage(insta[i]));
             allCmds.photos.push(insta[i]);
           }
+          commands.hidden.setPhotos(args.bgs);
         }
       }
 
@@ -53,48 +78,52 @@
       }
 
       p.draw = function() {
+        backgrounds = commands.hidden.getBackgrounds();
+        bgIndex = commands.hidden.getBgIndex();
         shape = commands.hidden.getShape();
         coords = commands.hidden.getCoords();
         dcoords = commands.hidden.getDcoords();
         fill = commands.hidden.getFill();
         stroke = commands.hidden.getStroke();
 
-        // if(args.bgs) {
-        //   p['background'](args.bgs[b]);
+        if(args.bgs.length > 0) {
+          console.log('args.bgs', args.bgs);
+          p.background(args.bgs[bgIndex]);
+        } else if (backgrounds.length > 0) {
+          p.background()
+        }
+
+        // if(args.bgs.length > 0) {
+        //   console.log('args.bgs', args.bgs);
+        //   p.background(args.bgs[0]);
+        //   console.log('p.background(args.bgs[bgIndex])', p.background(args.bgs[bgIndex]));
+        // } else if(backgrounds.length > 0){
+        //   p.background(backgrounds[bgIndex]);
         // }
 
-        if(fill) {
-          p.fill(fill);
-        }
-
-        if(stroke) {
-          p.stroke(stroke);
-        }
-
-        if(Object.keys(dcoords) && shape) {
-          p.clear();
-          p[shape](
-            (coords.one += (dcoords.one || null)),
-            (coords.two += (dcoords.two || null)),
-            (coords.three += (dcoords.three || null)),
-            (coords.four += (dcoords.four || null)),
-            (coords.five += (dcoords.five || null)),
-            (coords.six += (dcoords.six || null)),
-            (coords.seven += (dcoords.seven || null)),
-            (coords.eight += (dcoords.eight || null))
+        if(shape) {
+          p.build.push(
+            new Shape(
+              shape,
+              (fill || null),
+              (stroke || null),
+              (coords.one += (dcoords.one || null)),
+              (coords.two += (dcoords.two || null)),
+              (coords.three += (dcoords.three || null)),
+              (coords.four += (dcoords.four || null)),
+              (coords.five += (dcoords.five || null)),
+              (coords.six += (dcoords.six || null)),
+              (coords.seven += (dcoords.seven || null)),
+              (coords.eight += (dcoords.eight || null))
+            )
           );
           commands.hidden.setCoords(coords);
-        } else if(shape) {
-          p[shape](
-            coords.one,
-            coords.two,
-            coords.three,
-            coords.four,
-            coords.five,
-            coords.six,
-            coords.seven,
-            coords.eight
-          );
+        }
+        for (var i = 0; i < p.build.length; i++) {
+          p.build[i].display();
+        }
+        if(p.build.length > 3) {
+          p.build.splice(0, 1);
         }
       }
 
@@ -119,7 +148,7 @@
         }
 
         if(parseInt(args.saidWord)) {
-          commands.hidden.collection(p, args);
+          commands.hidden.setBgIndex(args.saidWord);
         }
 
         if(currentCmdSet.hasOwnProperty(args.saidWord)) {
@@ -128,7 +157,13 @@
             var type = currentCmdSet[args.saidWord](p,args);
             currentCmdSet = commands.valid;
             allCmds.validCmds = Object.keys(currentCmdSet);
-            if(type === 'shape' || type === 'transform' || type === 'stay'){
+            if(type === 'cancel'){
+              currentCmdSet = commands.valid;
+              allCmds.validCmds = Object.keys(currentCmdSet);
+            }
+            if(type === 'shape' ||
+              type === 'transform' ||
+              type === 'stay'){
               currentCmdSet = commands.valid.transform;
               allCmds.validCmds = Object.keys(currentCmdSet);
             }
@@ -136,8 +171,16 @@
               currentCmdSet = commands.hidden.stopMove;
               allCmds.validCmds = Object.keys(currentCmdSet);
             }
+            if(type === 'stop size'){
+              currentCmdSet = commands.hidden.stopSize;
+              allCmds.validCmds = Object.keys(currentCmdSet);
+            }
             if(type === 'position') {
               currentCmdSet = commands.valid.transform.position;
+              allCmds.validCmds = Object.keys(currentCmdSet);
+            }
+            if(type === 'size') {
+              currentCmdSet = commands.valid.transform.size;
               allCmds.validCmds = Object.keys(currentCmdSet);
             }
           } else {
