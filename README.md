@@ -14,7 +14,7 @@ Example command sequences:
   
 "CREATE" - "BACKGROUND" - "PHOTO" - "INSTAGRAM" - Runs Instagram OAuth and returns user photos for backgrounds. 
 
-"SIX" - Changes photo in background to the 6th photo in user's photo selection.
+"SIX" - Changes background Instagram photo to the 6th photo in photo selection at right panel.
   
 "CREATE" - "BACKGROUND" - "COLOR" - [Prompt for name of color or something colorful, ex. "sky"] - "GO" - Runs Colr.org call for hex values related to word.  
   
