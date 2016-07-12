@@ -6,6 +6,7 @@ A voice-command digital illustrator. Valid commands update dynamically in upper 
 
   
 Requirements:  
+
 Recent version of Google Chrome.  
 Instagram username - *Please note: Instagram currently authenticates TalkArt in sandbox mode. If you would like to incorporate your Instagram feed to use TalkArt, please reach out to me with your Instagram username and I will authorize it for usage.  
 
