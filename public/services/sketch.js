@@ -78,6 +78,7 @@
         if(args.bgs.length > 0){
           p.background('#ffffff');
           commands.hidden.setBgMode();
+          allCmds.photoMode = true;
         }
       }
 
@@ -91,15 +92,15 @@
         fill = commands.hidden.getFill();
         stroke = commands.hidden.getStroke();
 
-
-        // if (backgrounds.length === 0) {
-        //   p.background('#ffffff');
-        // }
         if(bgMode === 'photo') {
           p.background(args.bgs[bgIndex]);
+          allCmds.photoMode = true;
         }
+
         if ((backgrounds.length > 0) && bgMode === 'color') {
           p.background(backgrounds[bgIndex]);
+          allCmds.photoMode = false;
+          allCmds.bgColors = backgrounds;
         }
 
         if(shape) {
@@ -148,7 +149,7 @@
           $state.go('main.register');
         }
 
-        if(parseInt(args.saidWord)) {
+        if(parseInt(args.saidWord) && args.saidWord < 17) {
           commands.hidden.setBgIndex(args.saidWord);
         }
 

@@ -31,22 +31,22 @@
           position: {
             left: function() {
               dcoords = {};
-              dcoords.one = -1;
+              dcoords.one = -2;
               return 'position'
             },
             right:function() {
               dcoords = {};
-              dcoords.one = 1;
+              dcoords.one = 2;
               return 'position'
             },
             up: function() {
               dcoords = {};
-              dcoords.two = -1;
+              dcoords.two = -2;
               return 'position'
             },
             down: function() {
               dcoords = {};
-              dcoords.two = 1;
+              dcoords.two = 2;
               return 'position'
             },
             stop: function() {
@@ -55,12 +55,12 @@
             },
           },
           size: {
-            enlarge: function() {
-              dcoords.three = .4;
-              dcoords.four = .4;
+            larger: function() {
+              dcoords.three = .5;
+              dcoords.four = .5;
               return 'stop size'
             },
-            shrink: function() {
+            smaller: function() {
               dcoords.three = -.4;
               dcoords.four = -.4;
               return 'stop size'

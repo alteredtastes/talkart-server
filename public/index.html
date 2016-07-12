@@ -81,7 +81,23 @@
     </nav>
     <div ui-view>
     </div>
-    <div ng-show="main.photos" style="margin-top: 60px; margin-left: 80%;">
+    <div ng-show="!main.photoMode" style="margin-top: 60px; margin-left: 80%">
+      <div ng-repeat="color in main.bgColors track by $index">
+        <div style="display: inline-block; margin-right: 5px;" class="animated fadeInDown">
+
+          <div class="row" ng-if="$even">
+            <div style="background-color: {{main.bgColors[$index]}}; width: 55px; height: 55px">
+              <span style="padding-right: 15px; color: white; text-align: center; position: absolute;">{{$index+1}}</span>
+            </div>
+            <div style="background-color: {{main.bgColors[$index + 1]}}; width: 55px; height: 55px; margin-left: 55px; margin-top: -55px;">
+              <span style="padding-right: 15px; color: white; text-align: center; position: absolute;">{{$index+2}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div ng-show="main.photoMode" style="margin-top: 60px; margin-left: 80%;">
       <div ng-repeat="photo in main.photos track by $index">
         <div class="row" ng-if="$even">
           <div style="display: inline-block; margin-right: 5px;" class="animated fadeInDown">

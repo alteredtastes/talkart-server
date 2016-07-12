@@ -15,6 +15,8 @@
       vm.validCmds = cmdObj.validCmds;
       vm.logWord = cmdObj.logWord;
       vm.photos = cmdObj.photos;
+      vm.photoMode = cmdObj.photoMode;
+      vm.bgColors = cmdObj.bgColors;
       vm.capturedCmd = cmdObj.capturedCmd;
       if($stateParams.user && !vm.data) {
         vm.data = LoginService.returnUserData();

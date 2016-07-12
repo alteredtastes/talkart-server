@@ -7,18 +7,6 @@
 
   function MonitorService($rootScope) {
 
-    // var coords = {
-    //   x1: 50,
-    //   y1: 50,
-    //   x2: 0,
-    //   y2: 0,
-    //   x3: 0,
-    //   y3: 0,
-    //   z: 0,
-    //   w: 50,
-    //   h: 50,
-    // };
-
     var photoObjs;
     var action;
     var self = this;
@@ -29,6 +17,8 @@
       capturedCmd: '',
       captureId: '',
       photos: [],
+      photoMode: false,
+      bgColors: [],
     }
 
     function onValidCmdsChanged(subscriber) {
@@ -71,10 +61,6 @@
       return coords;
     }
 
-    function runFunction(command) {
-
-    }
-
     setInterval(function(){
 
       $rootScope.$evalAsync(notifyValidCmdsChanged);
@@ -87,7 +73,6 @@
       setPhotos: setPhotos,
       getPhotos: getPhotos,
       getCoords: getCoords,
-      runFunction: runFunction,
     }
   }
 })();
