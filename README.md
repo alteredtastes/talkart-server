@@ -9,7 +9,8 @@ TalkArt is a voice-operated digital illustrator. Valid commands update dynamical
 Requirements:  
 
 Recent version of Google Chrome.  
-Instagram username - *Please note: Instagram currently authenticates TalkArt in sandbox mode. If you would like to incorporate your Instagram feed to use TalkArt, please reach out to me with your Instagram username and I will authorize it for usage.  
+Instagram username -   
+*Please note: Instagram currently authenticates TalkArt in sandbox mode. If you would like to incorporate your Instagram feed to use TalkArt, please reach out to me with your Instagram username and I will authorize it for usage.  
 
 
 <img src="https://cloud.githubusercontent.com/assets/14845097/16727089/33fb74fa-4714-11e6-9660-c4be84f05d06.png" width="600px"/>
