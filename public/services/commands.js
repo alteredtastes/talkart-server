@@ -30,32 +30,37 @@
         transform: {
           position: {
             left: function() {
+              dcoords = {};
               dcoords.one = -1;
-              return 'stop move'
+              return 'position'
             },
             right:function() {
+              dcoords = {};
               dcoords.one = 1;
-              return 'stop move'
+              return 'position'
             },
             up: function() {
+              dcoords = {};
               dcoords.two = -1;
-              return 'stop move'
+              return 'position'
             },
             down: function() {
+              dcoords = {};
               dcoords.two = 1;
-              return 'stop move'
+              return 'position'
             },
-            stay: function() {
+            stop: function() {
+              dcoords = {};
               return 'stay'
             },
           },
           size: {
-            bigger: function() {
+            enlarge: function() {
               dcoords.three = .4;
               dcoords.four = .4;
               return 'stop size'
             },
-            smaller: function() {
+            shrink: function() {
               dcoords.three = -.4;
               dcoords.four = -.4;
               return 'stop size'
@@ -108,16 +113,14 @@
               coords.two = 50;
               coords.three = 50;
               coords.four = 50;
-              console.log('inside circle', coords);
               return 'shape'
             },
             rectangle: function() {
-              shape = 'rect'; //rect(x,y,z,w,h)
+              shape = 'rect'; //rect(x,y,w,h)
               coords.one = 200;
               coords.two = 100;
-              coords.three = 1;
+              coords.three = 300;
               coords.four = 300;
-              coords.five = 300;
               return 'shape'
             },
             triangle: function() {
@@ -140,12 +143,6 @@
         },
       },
       hidden: {
-        stopMove: {
-          stop: function() {
-            dcoords = {};
-            return 'position'
-          },
-        },
         stopSize: {
           stop: function() {
             dcoords = {};
@@ -176,7 +173,6 @@
         },
         setBgMode: function() {
           bgMode = 'photo';
-          console.log(bgMode);
         },
         getShape: function() {
           return shape;

@@ -64,7 +64,6 @@
             allCmds.photos.push(insta[i]);
           }
           commands.hidden.setPhotos(args.bgs);
-          commands.hidden.setBgMode();
         }
       }
 
@@ -76,6 +75,10 @@
         p.myRec.onResult = p.parseResult;
         p.myRec.start();
         MonitorService.setValidCmds(allCmds);
+        if(args.bgs.length > 0){
+          p.background('#ffffff');
+          commands.hidden.setBgMode();
+        }
       }
 
       p.draw = function() {
@@ -88,14 +91,14 @@
         fill = commands.hidden.getFill();
         stroke = commands.hidden.getStroke();
 
-        console.log('bgs', backgrounds);
-        console.log('bgIndex', bgIndex);
-        console.log('bgMode', bgMode);
 
-
-        if(insta && (bgMode === 'photo')) {
+        // if (backgrounds.length === 0) {
+        //   p.background('#ffffff');
+        // }
+        if(bgMode === 'photo') {
           p.background(args.bgs[bgIndex]);
-        } else if ((backgrounds.length > 0) && bgMode === 'color') {
+        }
+        if ((backgrounds.length > 0) && bgMode === 'color') {
           p.background(backgrounds[bgIndex]);
         }
 
@@ -120,7 +123,7 @@
         for (var i = 0; i < p.build.length; i++) {
           p.build[i].display();
         }
-        if(p.build.length > 3) {
+        if(p.build.length > 0) {
           p.build.splice(0, 1);
         }
       }
@@ -163,10 +166,6 @@
               type === 'transform' ||
               type === 'stay'){
               currentCmdSet = commands.valid.transform;
-              allCmds.validCmds = Object.keys(currentCmdSet);
-            }
-            if(type === 'stop move'){
-              currentCmdSet = commands.hidden.stopMove;
               allCmds.validCmds = Object.keys(currentCmdSet);
             }
             if(type === 'stop size'){
