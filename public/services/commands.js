@@ -18,6 +18,7 @@
 
     var shape, fill, stroke;
     var bgIndex = 0;
+    var bgMode;
     var backgrounds = [];
     var photos = [];
     var colors = [];
@@ -88,6 +89,7 @@
             },
             color: {
               go: function(p, args) {
+                bgMode = 'color';
                 colors = [];
                 $http.get('http://www.colr.org/json/tag/' + args.prevWord).then(function(data) {
                   colrorg = data.data.colors;
@@ -168,6 +170,13 @@
         },
         getBgIndex: function() {
           return bgIndex;
+        },
+        getBgMode: function() {
+          return bgMode || 'color';
+        },
+        setBgMode: function() {
+          bgMode = 'photo';
+          console.log(bgMode);
         },
         getShape: function() {
           return shape;

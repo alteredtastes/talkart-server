@@ -20,7 +20,7 @@
         prevWord: null,
       }
 
-      var shape, fill, stroke;
+      var shape, fill, stroke, bgMode;
       var bgIndex = 0;
       var backgrounds = [];
       var coords = {};
@@ -64,6 +64,7 @@
             allCmds.photos.push(insta[i]);
           }
           commands.hidden.setPhotos(args.bgs);
+          commands.hidden.setBgMode();
         }
       }
 
@@ -78,28 +79,25 @@
       }
 
       p.draw = function() {
-        backgrounds = commands.hidden.getBackgrounds();
         bgIndex = commands.hidden.getBgIndex();
+        backgrounds = commands.hidden.getBackgrounds();
+        bgMode = commands.hidden.getBgMode();
         shape = commands.hidden.getShape();
         coords = commands.hidden.getCoords();
         dcoords = commands.hidden.getDcoords();
         fill = commands.hidden.getFill();
         stroke = commands.hidden.getStroke();
 
-        if(args.bgs.length > 0) {
-          console.log('args.bgs', args.bgs);
-          p.background(args.bgs[bgIndex]);
-        } else if (backgrounds.length > 0) {
-          p.background()
-        }
+        console.log('bgs', backgrounds);
+        console.log('bgIndex', bgIndex);
+        console.log('bgMode', bgMode);
 
-        // if(args.bgs.length > 0) {
-        //   console.log('args.bgs', args.bgs);
-        //   p.background(args.bgs[0]);
-        //   console.log('p.background(args.bgs[bgIndex])', p.background(args.bgs[bgIndex]));
-        // } else if(backgrounds.length > 0){
-        //   p.background(backgrounds[bgIndex]);
-        // }
+
+        if(insta && (bgMode === 'photo')) {
+          p.background(args.bgs[bgIndex]);
+        } else if ((backgrounds.length > 0) && bgMode === 'color') {
+          p.background(backgrounds[bgIndex]);
+        }
 
         if(shape) {
           p.build.push(
