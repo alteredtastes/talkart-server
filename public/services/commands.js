@@ -96,7 +96,7 @@
               go: function(p, args) {
                 bgMode = 'color';
                 colors = [];
-                $http.get('http://www.colr.org/json/tag/' + args.prevWord).then(function(data) {
+                $http.get('https://cors-anywhere.herokuapp.com/http://www.colr.org/json/tag/' + args.prevWord).then(function(data) {
                   colrorg = data.data.colors;
                   for (var i = 0; i < 15; i++) {
                     colors.push('#' + colrorg[i].hex);
