@@ -109,8 +109,8 @@
           shape: {
             circle: function() {
               shape = 'ellipse'; //ellipse(x,y,w,h)
-              coords.one = 50;
-              coords.two = 50;
+              coords.one = 300;
+              coords.two = 300;
               coords.three = 50;
               coords.four = 50;
               return 'shape'
@@ -125,6 +125,12 @@
             },
             triangle: function() {
               shape = 'triangle'; //triangle(x1,y1,x2,y2,x3,y3)
+              coords.one = 200;
+              coords.two = 200;
+              coords.three = 300;
+              coords.four= 300;
+              coords.five = 400;
+              coords.six = 400; 
               return 'shape'
             },
             line: function() { //line(x1,y1,x2,y2)

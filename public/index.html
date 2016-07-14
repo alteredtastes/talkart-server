@@ -30,7 +30,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/">
-                  TalkArt
+                  <h4><strong>TalkArt</strong></h4>
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -49,17 +49,17 @@
                     <li class="animated bounce" ng-show="main.capturedCmd == 'color'">
                       <a>
                         <span class="text text">
-                          <strong>Name a color or a colorful thing.</strong>
+                          <h4><strong>Name a color or a colorful thing.</strong></h4>
                         </span>
                         <br />
-                        <span class="text" ng-show="main.logWord != 'color'">Your word is: <strong><span class="text-uppercase bg-default">"{{main.logWord}}".</span></strong><br />
-                         When ready, say <strong>"GO".</strong></span></span>
+                        <span class="text" ng-show="main.logWord != 'color'"><h4>Your word is: <strong><span class="text-uppercase bg-default">"{{main.logWord}}".</span></strong><br />
+                         When ready, say <strong>"GO".</strong></span></h4></span>
                       </a>
                     </li>
                     <li ng-repeat="command in main.validCmds track by $index" class="animated bounce" ng-show="main.capturedCmd != 'color'">
                       <a>
                         <span class="text text-uppercase">
-                          {{command}}
+                          <h4><strong>{{command}}</strong></h4>
                         </span>
                       </a>
                     </li>
@@ -81,7 +81,7 @@
     </nav>
     <div ui-view>
     </div>
-    <div ng-show="!main.photoMode" style="margin-top: 60px; margin-left: 80%">
+    <div ng-show="!main.photoMode" style="margin-top: 90px; margin-left: 80%">
       <div ng-repeat="color in main.bgColors track by $index">
         <div style="display: inline-block; margin-right: 5px;" class="animated fadeInDown">
 
@@ -97,16 +97,16 @@
       </div>
 
     </div>
-    <div ng-show="main.photoMode" style="margin-top: 60px; margin-left: 80%;">
+    <div ng-show="main.photoMode" style="margin-top: 90px; margin-left: 80%;">
       <div ng-repeat="photo in main.photos track by $index">
         <div class="row" ng-if="$even">
           <div style="display: inline-block; margin-right: 5px;" class="animated fadeInDown">
             <img ng-src="{{main.photos[$index]}}" alt="photo" style="width: 90px;"/>
-            <span style="padding-right: 15px; text-align: center; position: absolue;">{{$index+1}}</span>
+            <span style="padding-right: 15px; text-align: center;">{{$index+1}}</span>
           </div>
             <div style="display: inline-block; margin-right: 5px;" class="animated fadeInDown">
               <img ng-src="{{main.photos[$index+1]}}" alt="photo" style="width: 90px;" />
-              <span style="padding-right: 15px; text-align: center; position: absolue;">{{$index+2}}</span>
+              <span style="padding-right: 15px; text-align: center;">{{$index+2}}</span>
             </div>
         </div>
       </div>

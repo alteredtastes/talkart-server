@@ -25,7 +25,7 @@
       var backgrounds = [];
       var coords = {};
       var dcoords = {};
-      p.build = [];
+      var build = [];
 
       var insta = [];
       var allCmds = {};
@@ -104,7 +104,7 @@
         }
 
         if(shape) {
-          p.build.push(
+          build.push(
             new Shape(
               shape,
               (fill || null),
@@ -121,11 +121,11 @@
           );
           commands.hidden.setCoords(coords);
         }
-        for (var i = 0; i < p.build.length; i++) {
-          p.build[i].display();
+        for (var i = 0; i < build.length; i++) {
+          build[i].display();
         }
-        if(p.build.length > 0) {
-          p.build.splice(0, 1);
+        if(build.length > 0) {
+          build.splice(0, 1);
         }
       }
 
@@ -151,6 +151,11 @@
 
         if(parseInt(args.saidWord) && args.saidWord < 17) {
           commands.hidden.setBgIndex(args.saidWord);
+        }
+
+        if(args.saidWord.indexOf('commit') !== -1) {
+          console.log(args.test);
+          args.test.push(build[0]);
         }
 
         if(currentCmdSet.hasOwnProperty(args.saidWord)) {
