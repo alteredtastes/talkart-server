@@ -1,6 +1,6 @@
 #TalkArt
 
-talkart.herokuapp.com  
+http://talkart.herokuapp.com  
   
 TalkArt is a voice-operated digital illustrator. Valid commands update dynamically in upper left of screen notifying user of available operations. Incorporates Instagram API and OAuth2, Colr.org API calls for hex searches, and p5.js for speech library, shapes, and dynamic canvas.
   
